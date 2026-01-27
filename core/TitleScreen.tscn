@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://u22rtsuhrwpx"]
+
+[ext_resource type="Script" uid="uid://dos4blecek036" path="res://core/TitleScreen.gd" id="1_7gw6n"]
+
+[node name="TitleScreen" type="Node2D" unique_id=506704413]
+script = ExtResource("1_7gw6n")

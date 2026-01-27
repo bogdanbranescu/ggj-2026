@@ -1,0 +1,9 @@
+# Godot 4+ specific ignores
+.godot/
+.vscode/
+/android/
+_export/
+_log/
+
+# Mac
+.DS_Store

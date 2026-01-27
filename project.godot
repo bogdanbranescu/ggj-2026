@@ -1,0 +1,24 @@
+config_version=5
+
+[application]
+
+config/name="MaskedFighter"
+run/main_scene="uid://bvv4fg3ishhi4"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://gfx/icon.svg"
+
+[autoload]
+
+Global="*uid://bf3t8eicolysl"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
