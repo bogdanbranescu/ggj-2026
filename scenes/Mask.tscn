@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dujidtnscvq0h"]
+
+[ext_resource type="Script" uid="uid://bryy67pg4dyft" path="res://scripts/Mask.gd" id="1_eic0r"]
+
+[node name="Mask" type="RigidBody2D" unique_id=691236262]
+script = ExtResource("1_eic0r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1820585256]
+
+[node name="GroundCollider" type="CollisionShape2D" parent="." unique_id=1666523646]
+
+[node name="CollectionArea" type="Area2D" parent="." unique_id=1675755169]
