@@ -1,18 +1,44 @@
 [gd_scene format=3 uid="uid://bvv4fg3ishhi4"]
 
 [ext_resource type="Script" uid="uid://clsxunupsko1o" path="res://scripts/World.gd" id="1_u6prc"]
+[ext_resource type="PackedScene" uid="uid://dxnwsxjikbiht" path="res://scenes/Fighter.tscn" id="2_1lgw5"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_qcxh3"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_d4162"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ywcf5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1c63"]
+size = Vector2(4000, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lgw5"]
+size = Vector2(20, 1000)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hlk0d"]
+size = Vector2(20, 1000)
 
 [node name="World" type="Node2D" unique_id=98757806]
 script = ExtResource("1_u6prc")
+
+[node name="StateManager" type="Node" parent="." unique_id=96067999]
+
+[node name="StateChart" type="Node" parent="StateManager" unique_id=2129547545]
+script = ExtResource("2_qcxh3")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Mode" type="Node" parent="StateManager/StateChart" unique_id=2027981006]
+script = ExtResource("3_d4162")
+initial_state = NodePath("Pause")
+
+[node name="Intro" type="Node" parent="StateManager/StateChart/Mode" unique_id=916320550]
+script = ExtResource("4_ywcf5")
+
+[node name="Main" type="Node" parent="StateManager/StateChart/Mode" unique_id=2001730230]
+script = ExtResource("4_ywcf5")
+
+[node name="Pause" type="Node" parent="StateManager/StateChart/Mode" unique_id=352779452]
+script = ExtResource("4_ywcf5")
+
+[node name="Outro" type="Node" parent="StateManager/StateChart/Mode" unique_id=1479262261]
+script = ExtResource("4_ywcf5")
 
 [node name="Backdrop" type="Sprite2D" parent="." unique_id=537574637]
 
@@ -21,44 +47,32 @@ script = ExtResource("1_u6prc")
 [node name="Ground" type="StaticBody2D" parent="Environment" unique_id=821027775]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Ground" unique_id=604389993]
+position = Vector2(0, 200)
 shape = SubResource("RectangleShape2D_d1c63")
 
 [node name="LimitLeft" type="StaticBody2D" parent="Environment" unique_id=136285355]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/LimitLeft" unique_id=48154889]
+position = Vector2(-2000, -300)
 shape = SubResource("RectangleShape2D_1lgw5")
 
 [node name="LimitRight" type="StaticBody2D" parent="Environment" unique_id=510609239]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/LimitRight" unique_id=1813589498]
+position = Vector2(2000, -300)
 shape = SubResource("RectangleShape2D_hlk0d")
 
 [node name="Characters" type="Node2D" parent="." unique_id=1944501478]
 
 [node name="Camera2D" type="Camera2D" parent="Characters" unique_id=2044144339]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=418506312]
+[node name="Fighter" parent="Characters" unique_id=2083199202 instance=ExtResource("2_1lgw5")]
 
-[node name="UI" type="VBoxContainer" parent="CanvasLayer" unique_id=1958297920]
+[node name="UI" type="CanvasLayer" parent="." unique_id=418506312]
+
+[node name="UIContainer" type="VBoxContainer" parent="UI" unique_id=1958297920]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="StateChart" type="Node" parent="." unique_id=2129547545]
-script = ExtResource("2_qcxh3")
-metadata/_custom_type_script = "uid://couw105c3bde4"
-
-[node name="Mode" type="Node" parent="StateChart" unique_id=2027981006]
-script = ExtResource("3_d4162")
-initial_state = NodePath("Pause")
-
-[node name="Intro" type="Node" parent="StateChart/Mode" unique_id=916320550]
-script = ExtResource("4_ywcf5")
-
-[node name="Main" type="Node" parent="StateChart/Mode" unique_id=2001730230]
-script = ExtResource("4_ywcf5")
-
-[node name="Pause" type="Node" parent="StateChart/Mode" unique_id=352779452]
-script = ExtResource("4_ywcf5")
-
-[node name="Outro" type="Node" parent="StateChart/Mode" unique_id=1479262261]
-script = ExtResource("4_ywcf5")
+[node name="Bars" type="HBoxContainer" parent="UI/UIContainer" unique_id=1442292978]
+layout_mode = 2
