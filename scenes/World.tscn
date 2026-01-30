@@ -2,12 +2,18 @@
 
 [ext_resource type="Script" uid="uid://clsxunupsko1o" path="res://scripts/World.gd" id="1_u6prc"]
 [ext_resource type="PackedScene" uid="uid://dxnwsxjikbiht" path="res://scenes/Fighter.tscn" id="2_1lgw5"]
+[ext_resource type="Script" uid="uid://c1ysxw4w7211r" path="res://scripts/StateManager.gd" id="2_h1bdy"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_qcxh3"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_d4162"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ywcf5"]
+[ext_resource type="Texture2D" uid="uid://cc5by7ejn8dj8" path="res://gfx/environment/icon.svg" id="5_0uv0p"]
+[ext_resource type="Texture2D" uid="uid://bo0yfhy2fu12q" path="res://gfx/environment/background-far.png" id="5_b3faq"]
+[ext_resource type="Script" uid="uid://co8or8igfhm70" path="res://scripts/Camera.gd" id="5_hlk0d"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_7c4bj"]
+[ext_resource type="Script" uid="uid://cty4ggpa7ngot" path="res://scripts/MaskSpawner.gd" id="7_ygioq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1c63"]
-size = Vector2(4000, 20)
+size = Vector2(3000, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lgw5"]
 size = Vector2(20, 1000)
@@ -18,7 +24,10 @@ size = Vector2(20, 1000)
 [node name="World" type="Node2D" unique_id=98757806]
 script = ExtResource("1_u6prc")
 
+[node name="TimeKeeper" type="Timer" parent="." unique_id=939310887]
+
 [node name="StateManager" type="Node" parent="." unique_id=96067999]
+script = ExtResource("2_h1bdy")
 
 [node name="StateChart" type="Node" parent="StateManager" unique_id=2129547545]
 script = ExtResource("2_qcxh3")
@@ -26,13 +35,19 @@ metadata/_custom_type_script = "uid://couw105c3bde4"
 
 [node name="Mode" type="Node" parent="StateManager/StateChart" unique_id=2027981006]
 script = ExtResource("3_d4162")
-initial_state = NodePath("Pause")
+initial_state = NodePath("Main")
 
 [node name="Intro" type="Node" parent="StateManager/StateChart/Mode" unique_id=916320550]
 script = ExtResource("4_ywcf5")
 
 [node name="Main" type="Node" parent="StateManager/StateChart/Mode" unique_id=2001730230]
 script = ExtResource("4_ywcf5")
+
+[node name="_Outro" type="Node" parent="StateManager/StateChart/Mode/Main" unique_id=1781005626]
+script = ExtResource("6_7c4bj")
+to = NodePath("../../Outro")
+event = &"game_over"
+delay_in_seconds = "0.0"
 
 [node name="Pause" type="Node" parent="StateManager/StateChart/Mode" unique_id=352779452]
 script = ExtResource("4_ywcf5")
@@ -41,32 +56,54 @@ script = ExtResource("4_ywcf5")
 script = ExtResource("4_ywcf5")
 
 [node name="Backdrop" type="Sprite2D" parent="." unique_id=537574637]
+texture = ExtResource("5_b3faq")
 
 [node name="Environment" type="Node2D" parent="." unique_id=1303032420]
 
 [node name="Ground" type="StaticBody2D" parent="Environment" unique_id=821027775]
+collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Ground" unique_id=604389993]
 position = Vector2(0, 200)
 shape = SubResource("RectangleShape2D_d1c63")
 
+[node name="Sprite2D" type="Sprite2D" parent="Environment/Ground" unique_id=1357961194]
+position = Vector2(0, 254)
+texture = ExtResource("5_0uv0p")
+
 [node name="LimitLeft" type="StaticBody2D" parent="Environment" unique_id=136285355]
+position = Vector2(-1500, -300)
+collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/LimitLeft" unique_id=48154889]
-position = Vector2(-2000, -300)
 shape = SubResource("RectangleShape2D_1lgw5")
 
 [node name="LimitRight" type="StaticBody2D" parent="Environment" unique_id=510609239]
+position = Vector2(1500, -300)
+collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/LimitRight" unique_id=1813589498]
-position = Vector2(2000, -300)
 shape = SubResource("RectangleShape2D_hlk0d")
+
+[node name="MaskSpawner" type="Node2D" parent="Environment" unique_id=1648894721]
+position = Vector2(-2, -671)
+script = ExtResource("7_ygioq")
+
+[node name="Timer" type="Timer" parent="Environment/MaskSpawner" unique_id=1365486248]
 
 [node name="Characters" type="Node2D" parent="." unique_id=1944501478]
 
-[node name="Camera2D" type="Camera2D" parent="Characters" unique_id=2044144339]
+[node name="Camera" type="Camera2D" parent="Characters" unique_id=2044144339]
+position = Vector2(2, -11)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+script = ExtResource("5_hlk0d")
 
-[node name="Fighter" parent="Characters" unique_id=2083199202 instance=ExtResource("2_1lgw5")]
+[node name="Fighter_1" parent="Characters" unique_id=2083199202 instance=ExtResource("2_1lgw5")]
+position = Vector2(-316, 0)
+
+[node name="Fighter_2" parent="Characters" unique_id=937528637 instance=ExtResource("2_1lgw5")]
+position = Vector2(316, 0)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=418506312]
 

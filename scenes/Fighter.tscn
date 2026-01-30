@@ -2,18 +2,42 @@
 
 [ext_resource type="Script" uid="uid://xh47hmansvo4" path="res://scripts/FighterController.gd" id="1_l7220"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_0dnrr"]
+[ext_resource type="Texture2D" uid="uid://bywtj1husymy8" path="res://gfx/characters/fighter.png" id="2_w2163"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_ogmxr"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_dsvqb"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_l7220"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_stky8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_w2163")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2163"]
+radius = 70.0
+height = 220.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2163"]
+size = Vector2(144, 20)
 
 [node name="Fighter" type="CharacterBody2D" unique_id=2083199202]
 script = ExtResource("1_l7220")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1377012607]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1377012607]
+sprite_frames = SubResource("SpriteFrames_stky8")
+
+[node name="CollectionArea" type="Area2D" parent="." unique_id=388875658]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea" unique_id=1101622962]
+shape = SubResource("CapsuleShape2D_w2163")
 
 [node name="GroundCollider" type="CollisionShape2D" parent="." unique_id=2026281978]
-shape = SubResource("CircleShape2D_l7220")
+position = Vector2(0, 102)
+shape = SubResource("RectangleShape2D_w2163")
 
 [node name="Hitboxes" type="Node2D" parent="." unique_id=1959475508]
 
@@ -29,6 +53,9 @@ initial_state = NodePath("Damaged")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
 
 [node name="Wait" type="Node" parent="StateChart/Mode" unique_id=147412507]
+script = ExtResource("4_dsvqb")
+
+[node name="Staggered" type="Node" parent="StateChart/Mode" unique_id=898610368]
 script = ExtResource("4_dsvqb")
 
 [node name="Walk" type="Node" parent="StateChart/Mode" unique_id=1233187336]
