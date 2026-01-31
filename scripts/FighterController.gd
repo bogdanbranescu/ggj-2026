@@ -67,7 +67,7 @@ func jump(force) -> void:
 
 
 func collect_mask(mask: RigidBody2D) -> void:
-	mask.call_deferred("reparent", self , false)
+	mask.call_deferred("reparent", self.masks)
 
 
 func use_masks() -> void:

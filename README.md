@@ -5,13 +5,13 @@ Get Godot 4.6 from: https://godotengine.org/download/
 
 ## Requirements
 ### Code
-- [ ] Basic character movement (jumping later if time allows)
+- [x] Basic character movement (jumping later if time allows)
 - [ ] Solid colliders, hitboxes, hurtboxes, collection areas (adjust when character sillhouettes are available)
 - [ ] Frame decision algorithm (who hit who, overlaps, etc)
-- [ ] Dynamic 2-player camera
+- [x] Dynamic 2-player camera
 - [ ] Default ability (ideas: mask stealing, weak push, etc)
 - [ ] Mask abilities (ideas: punch, kick, defend, dash, uppercut, ranged attack, teleport, divekick, etc)
-- [ ] Mask spawning and physics
+- [x] Mask spawning and physics
 - [ ] Mask stacking on character and stacked ability execution
 - [ ] Common fighting game mechanics (hitstop, blockstop, hit stun, block stun, maybe cancelling)
 - [ ] UI elements (health bars, time left, etc)

@@ -4,6 +4,7 @@ extends RigidBody2D
 @onready var collectable_area = $CollectableArea
 
 var ability: Global.ABILITIES
+var ability_duration := 0.5
 
 
 func _ready() -> void:
@@ -35,4 +36,4 @@ func apply_mask(area: Area2D) -> void:
 	if area.name == "CollectionArea":
 		area.get_parent().collect_mask(self )
 		#area.get_parent().get_damage(25)
-		queue_free()
+		#queue_free()

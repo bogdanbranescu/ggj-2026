@@ -25,6 +25,8 @@ size = Vector2(20, 1000)
 [node name="World" type="Node2D" unique_id=98757806]
 script = ExtResource("1_u6prc")
 
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=525985914]
+
 [node name="TimeKeeper" type="Timer" parent="." unique_id=939310887]
 
 [node name="StateManager" type="Node" parent="." unique_id=96067999]
