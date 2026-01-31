@@ -3,8 +3,11 @@ extends RigidBody2D
 
 @onready var collectable_area = $CollectableArea
 
-var ability: Global.ABILITIES
-var ability_duration := 0.5
+var ability: Dictionary
+var ability_animation_duration := 0.5
+
+var mask_expiry_time := 6.0
+var mask_use_count := 3
 
 
 func _ready() -> void:
@@ -12,20 +15,11 @@ func _ready() -> void:
 
 
 func set_ability() -> void:
-	match ability:
-		Global.ABILITIES.PUNCH:
-			# TODO set art, behaviour, etc
-			pass
-		
-		Global.ABILITIES.KICK:
-			pass
-		
-		_:
-			pass
+	pass
 
 
 func use_ability() -> void:
-	print("USED ABILITY", Global.ABILITIES.keys()[ability as Global.ABILITIES])
+	print("USED ABILITY ", ability.name)
 
 
 func _physics_process(_delta: float) -> void:

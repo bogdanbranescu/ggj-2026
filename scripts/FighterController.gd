@@ -2,17 +2,23 @@ extends CharacterBody2D
 
 
 @onready var state = $StateChart
-@onready var masks = $MaskStack
+@onready var sprite = $Sprite
+@onready var mask_holder = $MaskHolder
 
 # Info
 var id: int
 var hp: int
+var is_holding_mask: bool
 
 # Movement
 @export var gravity = 4000
 @export var speed = 400
 var jump_force := 1500
 var direction := 0.0
+var facing := 1.0
+
+# Combat
+var is_attacking := false
 
 
 func _ready() -> void:
@@ -36,19 +42,26 @@ func _physics_process(delta: float) -> void:
 	velocity.x = direction * speed
 	velocity.y += gravity * delta
 	
-	move_and_slide()
+	if not is_attacking:
+		update_facing()
+		move_and_slide()
+	
+	update_animations()
 
 
 func act(delta: float) -> void:
-	if Input.is_action_pressed("action" + str(id)):
-		if masks.get_child_count() == 0:
+	if Input.is_action_just_pressed("action" + str(id)):
+		if mask_holder.get_child_count() == 0:
 			attack_default()
 		else:
-			masks.use_abilities()
+			mask_holder.use_abilities()
 
 
 func attack_default() -> void:
-	pass
+	is_attacking = true
+	sprite.play("base_attack")
+	await sprite.animation_finished
+	is_attacking = false
 
 
 func move(_delta: float) -> void:
@@ -67,11 +80,9 @@ func jump(force) -> void:
 
 
 func collect_mask(mask: RigidBody2D) -> void:
-	mask.call_deferred("reparent", self.masks)
-
-
-func use_masks() -> void:
-	pass
+	# if mask_holder.get_child_count() > 0:
+	# 	mask_holder.get_child(0).queue_free()
+	mask.call_deferred("reparent", self.mask_holder)
 
 
 func get_damage(damage_amount: int) -> void:
@@ -85,3 +96,25 @@ func get_damage(damage_amount: int) -> void:
 
 func die() -> void:
 	EventBus.player_died.emit(id)
+
+
+func update_animations():
+	if is_attacking:
+		return
+
+	if is_on_floor():
+		if direction == 0:
+			sprite.play("idle")
+		else:
+			sprite.play("walk")
+	else:
+		if velocity.y < 0:
+			sprite.play("jump")
+		else:
+			sprite.play("fall")
+
+
+func update_facing():
+	if direction != 0:
+		facing = direction
+		sprite.flip_h = (direction == -1)
