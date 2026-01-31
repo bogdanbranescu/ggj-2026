@@ -45,6 +45,9 @@ func spawn() -> void:
 
 	randomize()
 	new_mask.position.x = eligible_spawning_points.pick_random()
+	# TODO maybe a more complex heuristic for mask ability?
+	randomize()
+	new_mask.ability = Global.ABILITIES.values().pick_random()
 
 	add_child(new_mask)
 

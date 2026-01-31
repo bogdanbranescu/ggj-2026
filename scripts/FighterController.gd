@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var state = $StateChart
 @onready var sprite = $Sprite
 @onready var mask_holder = $MaskHolder
+@onready var hitboxes = %Hitboxes
+
 
 # Info
 var id: int
@@ -54,7 +56,7 @@ func act(delta: float) -> void:
 		if mask_holder.get_child_count() == 0:
 			attack_default()
 		else:
-			mask_holder.use_abilities()
+			mask_holder.get_child(0).use_ability()
 
 
 func attack_default() -> void:
@@ -76,12 +78,12 @@ func jump(force) -> void:
 	# jump_hold_timer.start()
 	# jump_buffer_timer.stop()
 
-	$SoundJump.play() # TODO add jump sound
+	$Sounds/Jump.play() # TODO add actual jump sound
 
 
 func collect_mask(mask: RigidBody2D) -> void:
-	# if mask_holder.get_child_count() > 0:
-	# 	mask_holder.get_child(0).queue_free()
+	if mask_holder.get_child_count() > 0:
+		mask_holder.get_child(0).queue_free()
 	mask.call_deferred("reparent", self.mask_holder)
 
 
@@ -117,4 +119,5 @@ func update_animations():
 func update_facing():
 	if direction != 0:
 		facing = direction
+		hitboxes.scale.x = direction
 		sprite.flip_h = (direction == -1)

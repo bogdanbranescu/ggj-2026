@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://br3fijvhukivf" path="res://gfx/characters/P1/Attack/Base_Atk_03.png" id="5_r1c5o"]
 [ext_resource type="Texture2D" uid="uid://bdlsgs0hb3x50" path="res://gfx/characters/P1/Idle/Idle_03.png" id="5_w3ptb"]
 [ext_resource type="Texture2D" uid="uid://djh3ww6mfhgpg" path="res://gfx/characters/P1/Attack/Base_Atk_04.png" id="6_3ou6g"]
+[ext_resource type="Texture2D" uid="uid://cp5svfe1yesqy" path="res://gfx/characters/P1/Recoil/Recoil_01.png" id="7_iohhj"]
 [ext_resource type="Texture2D" uid="uid://dat2qag01eiw6" path="res://gfx/characters/P1/Jump/Jump_01.png" id="10_4e5sj"]
 [ext_resource type="Texture2D" uid="uid://ukaekb688036" path="res://gfx/characters/P1/Jump/Jump_02.png" id="11_iohhj"]
 [ext_resource type="Texture2D" uid="uid://cp4tavj6tlnh5" path="res://gfx/characters/P1/Walk/walk_01.png" id="12_s7iku"]
@@ -40,7 +41,10 @@ animations = [{
 "name": &"base_attack",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_iohhj")
+}],
 "loop": true,
 "name": &"damaged",
 "speed": 5.0
@@ -113,8 +117,16 @@ size = Vector2(144, 20)
 collision_layer = 0
 script = ExtResource("1_l7220")
 
-[node name="SoundJump" type="AudioStreamPlayer" parent="." unique_id=411547027]
+[node name="Sounds" type="Node" parent="." unique_id=217332313]
+
+[node name="Jump" type="AudioStreamPlayer" parent="Sounds" unique_id=411547027]
 stream = ExtResource("2_7p24r")
+
+[node name="Punch" type="AudioStreamPlayer" parent="Sounds" unique_id=2088674879]
+
+[node name="Fireball" type="AudioStreamPlayer" parent="Sounds" unique_id=367519213]
+
+[node name="Dash" type="AudioStreamPlayer" parent="Sounds" unique_id=564812488]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1377012607]
 texture_filter = 5
@@ -124,6 +136,7 @@ animation = &"damaged"
 autoplay = "idle"
 
 [node name="Hitboxes" type="Node2D" parent="Sprite" unique_id=1959475508]
+unique_name_in_owner = true
 
 [node name="Area2D" type="Area2D" parent="Sprite/Hitboxes" unique_id=615975205]
 position = Vector2(350, -70)

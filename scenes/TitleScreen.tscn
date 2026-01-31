@@ -1,19 +1,853 @@
 [gd_scene format=3 uid="uid://u22rtsuhrwpx"]
 
 [ext_resource type="Script" uid="uid://dos4blecek036" path="res://scripts/TitleScreen.gd" id="1_7gw6n"]
+[ext_resource type="AudioStream" uid="uid://d0lh2hd2pe8v7" path="res://audio/music/title.mp3" id="2_8k5og"]
+[ext_resource type="FontFile" uid="uid://dxg02gfagxjgn" path="res://ui/fonts/DirtyBrush.ttf" id="2_ch40n"]
+[ext_resource type="Shader" uid="uid://bqj1h1p1g3gpa" path="res://ui/shader/title_background.gdshader" id="3_85feu"]
+[ext_resource type="FontFile" uid="uid://dbha2xtkpvmx4" path="res://ui/fonts/mabook/Mabook.ttf" id="3_dfj8j"]
+[ext_resource type="Texture2D" uid="uid://hbel2r8gfqt7" path="res://gfx/environment/Titllescreen_BG_Tile00001.png" id="4_85feu"]
+[ext_resource type="Texture2D" uid="uid://cp5svfe1yesqy" path="res://gfx/characters/P1/Recoil/Recoil_01.png" id="7_66w26"]
+[ext_resource type="Texture2D" uid="uid://fksk8j2qhlg7" path="res://gfx/characters/P1/Walk/walk_06.png" id="8_1vfo2"]
+[ext_resource type="Texture2D" uid="uid://ch5ns0rr7uf3t" path="res://gfx/characters/P1/Idle/Idle_02.png" id="8_3ej01"]
+[ext_resource type="Texture2D" uid="uid://djh3ww6mfhgpg" path="res://gfx/characters/P1/Attack/Base_Atk_04.png" id="9_w20ru"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f48o8"]
+shader = ExtResource("3_85feu")
+shader_parameter/direction = Vector2(1, -1)
+shader_parameter/speed = 0.12
+
+[sub_resource type="Shader" id="Shader_dfj8j"]
+code = "shader_type canvas_item;
+
+uniform float offset : hint_range(0.0, 2.0);
+const float amplitude = 50.0;
+const float frequency  = 8.0;
+const float speed = 3.0;
+
+varying vec2 world_pos;
+
+void vertex() {
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0, 1.0)).xy;
+    float wave = sin((TIME + 2.0 * offset) * speed);
+    VERTEX.y += wave * amplitude;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dfj8j"]
+shader = SubResource("Shader_dfj8j")
+shader_parameter/offset = 0.0
+
+[sub_resource type="Shader" id="Shader_8k5og"]
+code = "shader_type canvas_item;
+
+uniform float offset : hint_range(0.0, 1.0);
+const float amplitude = 50.0;
+const float frequency  = 8.0;
+const float speed = 3.0;
+
+varying vec2 world_pos;
+
+void vertex() {
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0, 1.0)).xy;
+    float wave = sin((TIME + 2.0 * offset) * speed);
+    VERTEX.y += wave * amplitude;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4l16e"]
+shader = SubResource("Shader_8k5og")
+shader_parameter/offset = 0.2000000095
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85feu"]
+shader = SubResource("Shader_dfj8j")
+shader_parameter/offset = 0.30000001425
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_66w26"]
+shader = SubResource("Shader_dfj8j")
+shader_parameter/offset = 0.400000019
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ej01"]
+shader = SubResource("Shader_dfj8j")
+shader_parameter/offset = 0.50000002375
+
+[sub_resource type="Shader" id="Shader_4l16e"]
+code = "shader_type canvas_item;
+
+uniform float offset : hint_range(0.0, 1.0);
+const float amplitude = 50.0;
+const float frequency  = 8.0;
+const float speed = 3.0;
+
+varying vec2 world_pos;
+
+void vertex() {
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0, 1.0)).xy;
+    float wave = sin((TIME + 2.0 * offset) * speed);
+    VERTEX.y += wave * amplitude;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w20ru"]
+shader = SubResource("Shader_4l16e")
+shader_parameter/offset = 0.6000000285
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vfo2"]
+shader = SubResource("Shader_dfj8j")
+shader_parameter/offset = 0.70000003325
+
+[sub_resource type="Shader" id="Shader_85feu"]
+code = "shader_type canvas_item;
+
+uniform float offset : hint_range(0.0, 1.0);
+const float amplitude = 50.0;
+const float frequency  = 8.0;
+const float speed = 3.0;
+
+varying vec2 world_pos;
+
+void vertex() {
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0, 1.0)).xy;
+    float wave = sin((TIME + 2.0 * offset) * speed);
+    VERTEX.y += wave * amplitude;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjcsb"]
+shader = SubResource("Shader_85feu")
+shader_parameter/offset = 0.800000038
+
+[sub_resource type="Shader" id="Shader_66w26"]
+code = "shader_type canvas_item;
+
+uniform float offset : hint_range(0.0, 1.0);
+const float amplitude = 50.0;
+const float frequency  = 8.0;
+const float speed = 3.0;
+
+varying vec2 world_pos;
+
+void vertex() {
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0, 1.0)).xy;
+    float wave = sin((TIME + 2.0 * offset) * speed);
+    VERTEX.y += wave * amplitude;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ktle"]
+shader = SubResource("Shader_66w26")
+shader_parameter/offset = 0.90000004275
+
+[sub_resource type="Shader" id="Shader_3ej01"]
+code = "shader_type canvas_item;
+
+uniform float offset : hint_range(0.0, 2.0);
+const float amplitude = 50.0;
+const float speed = 3.0;
+
+varying vec2 world_pos;
+
+void vertex() {
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0, 1.0)).xy;
+    float wave = sin((TIME + 2.0 * offset) * speed);
+    VERTEX.y += wave * amplitude;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7b4h"]
+shader = SubResource("Shader_3ej01")
+shader_parameter/offset = 1.0
+
+[sub_resource type="Shader" id="Shader_w20ru"]
+code = "shader_type canvas_item;
+
+uniform float offset : hint_range(0.0, 2.0
+);
+const float amplitude = 50.0;
+const float frequency  = 8.0;
+const float speed = 3.0;
+
+varying vec2 world_pos;
+
+void vertex() {
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0, 1.0)).xy;
+    float wave = sin((TIME + 2.0 * offset) * speed);
+    VERTEX.y += wave * amplitude;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3mdse"]
+shader = SubResource("Shader_w20ru")
+shader_parameter/offset = 1.10000005225
+
+[sub_resource type="Shader" id="Shader_1vfo2"]
+code = "shader_type canvas_item;
+
+uniform float offset : hint_range(0.0, 2.0);
+const float amplitude = 50.0;
+const float frequency  = 8.0;
+const float speed = 3.0;
+
+varying vec2 world_pos;
+
+void vertex() {
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0, 1.0)).xy;
+    float wave = sin((TIME + 2.0 * offset) * speed);
+    VERTEX.y += wave * amplitude;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8k5og"]
+shader = SubResource("Shader_1vfo2")
+shader_parameter/offset = 1.200000057
 
 [node name="TitleScreen" type="Node2D" unique_id=506704413]
 script = ExtResource("1_7gw6n")
 
-[node name="Background" type="TextureRect" parent="." unique_id=1780753344]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1266046835]
+stream = ExtResource("2_8k5og")
+autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=894902834]
 
-[node name="UI" type="VBoxContainer" parent="CanvasLayer" unique_id=1206791509]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="BackgroundSolid" type="ColorRect" parent="CanvasLayer" unique_id=1143595597]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="TitleText" type="RichTextLabel" parent="CanvasLayer/UI" unique_id=1225348772]
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=2097533332]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundPattern" type="TextureRect" parent="CanvasLayer/Control" unique_id=1780753344]
+material = SubResource("ShaderMaterial_f48o8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_85feu")
+expand_mode = 1
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CharactersLeft" type="Control" parent="CanvasLayer" unique_id=1313393318]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -602.0
+offset_right = -10.0
+offset_bottom = -602.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainerLeft" type="HBoxContainer" parent="CanvasLayer/CharactersLeft" unique_id=527183542]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 568.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft" unique_id=1825429748]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="CharactersLeft" type="VBoxContainer" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft" unique_id=1560855998]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft/CharactersLeft" unique_id=1395911870]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft/CharactersLeft/Control" unique_id=2081498411]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("7_66w26")
+expand_mode = 5
+
+[node name="Control2" type="Control" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft/CharactersLeft" unique_id=243304376]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft/CharactersLeft/Control2" unique_id=387756195]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -21.0
+offset_right = -2.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("8_3ej01")
+expand_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft/CharactersLeft" unique_id=1306716851]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft/CharactersLeft" unique_id=547339947]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft/CharactersLeft/Control3" unique_id=1476685227]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("9_w20ru")
+expand_mode = 5
+
+[node name="Control4" type="Control" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft/CharactersLeft" unique_id=48659532]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft/CharactersLeft/Control4" unique_id=1909029058]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("8_1vfo2")
+expand_mode = 5
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft" unique_id=591589975]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainerLeft2" type="HBoxContainer" parent="CanvasLayer/CharactersLeft" unique_id=751213543]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1162.0
+offset_right = 568.0
+offset_bottom = 1188.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2" unique_id=985175458]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="CharactersLeft" type="VBoxContainer" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2" unique_id=1376095285]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2/CharactersLeft" unique_id=33886804]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2/CharactersLeft/Control" unique_id=2118165806]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("7_66w26")
+expand_mode = 5
+
+[node name="Control2" type="Control" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2/CharactersLeft" unique_id=605740866]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2/CharactersLeft/Control2" unique_id=1379732636]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -21.0
+offset_right = -2.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("8_3ej01")
+expand_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2/CharactersLeft" unique_id=69053457]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2/CharactersLeft" unique_id=1778238559]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2/CharactersLeft/Control3" unique_id=393121649]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("9_w20ru")
+expand_mode = 5
+
+[node name="Control4" type="Control" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2/CharactersLeft" unique_id=1325614482]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2/CharactersLeft/Control4" unique_id=532796211]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("8_1vfo2")
+expand_mode = 5
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/CharactersLeft/HBoxContainerLeft2" unique_id=1275647325]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharactersRight" type="Control" parent="CanvasLayer" unique_id=188587019]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -608.0
+offset_bottom = -608.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainerRight" type="HBoxContainer" parent="CanvasLayer/CharactersRight" unique_id=1227261965]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 1039.0
+offset_right = -3.0
+offset_bottom = 1039.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, -1)
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/CharactersRight/HBoxContainerRight" unique_id=1749302076]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharactersLeft2" type="VBoxContainer" parent="CanvasLayer/CharactersRight/HBoxContainerRight" unique_id=1743722339]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/CharactersRight/HBoxContainerRight/CharactersLeft2" unique_id=1539564956]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CharactersRight/HBoxContainerRight/CharactersLeft2/Control" unique_id=839519081]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("7_66w26")
+expand_mode = 5
+flip_h = true
+
+[node name="Control2" type="Control" parent="CanvasLayer/CharactersRight/HBoxContainerRight/CharactersLeft2" unique_id=1534332672]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/CharactersRight/HBoxContainerRight/CharactersLeft2/Control2" unique_id=1838923247]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -21.0
+offset_right = -2.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("8_3ej01")
+expand_mode = 5
+flip_h = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CharactersRight/HBoxContainerRight/CharactersLeft2" unique_id=869061528]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="CanvasLayer/CharactersRight/HBoxContainerRight/CharactersLeft2" unique_id=37065876]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/CharactersRight/HBoxContainerRight/CharactersLeft2/Control3" unique_id=390121336]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("9_w20ru")
+expand_mode = 5
+flip_h = true
+
+[node name="Control4" type="Control" parent="CanvasLayer/CharactersRight/HBoxContainerRight/CharactersLeft2" unique_id=404052441]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/CharactersRight/HBoxContainerRight/CharactersLeft2/Control4" unique_id=1526179786]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("8_1vfo2")
+expand_mode = 5
+flip_h = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/CharactersRight/HBoxContainerRight" unique_id=583029705]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="HBoxContainerRight2" type="HBoxContainer" parent="CanvasLayer/CharactersRight" unique_id=711900994]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 2201.0
+offset_right = -3.0
+offset_bottom = 2201.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, -1)
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/CharactersRight/HBoxContainerRight2" unique_id=1844605226]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharactersLeft2" type="VBoxContainer" parent="CanvasLayer/CharactersRight/HBoxContainerRight2" unique_id=722406253]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/CharactersRight/HBoxContainerRight2/CharactersLeft2" unique_id=2023279439]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CharactersRight/HBoxContainerRight2/CharactersLeft2/Control" unique_id=334427086]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("7_66w26")
+expand_mode = 5
+flip_h = true
+
+[node name="Control2" type="Control" parent="CanvasLayer/CharactersRight/HBoxContainerRight2/CharactersLeft2" unique_id=174084260]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/CharactersRight/HBoxContainerRight2/CharactersLeft2/Control2" unique_id=211512360]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -21.0
+offset_right = -2.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("8_3ej01")
+expand_mode = 5
+flip_h = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CharactersRight/HBoxContainerRight2/CharactersLeft2" unique_id=1714678056]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="CanvasLayer/CharactersRight/HBoxContainerRight2/CharactersLeft2" unique_id=1916485079]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/CharactersRight/HBoxContainerRight2/CharactersLeft2/Control3" unique_id=1537614707]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("9_w20ru")
+expand_mode = 5
+flip_h = true
+
+[node name="Control4" type="Control" parent="CanvasLayer/CharactersRight/HBoxContainerRight2/CharactersLeft2" unique_id=1240603321]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/CharactersRight/HBoxContainerRight2/CharactersLeft2/Control4" unique_id=1085216629]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("8_1vfo2")
+expand_mode = 5
+flip_h = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/CharactersRight/HBoxContainerRight2" unique_id=426113862]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="UI" type="VBoxContainer" parent="CanvasLayer" unique_id=1206791509]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainerTop" type="MarginContainer" parent="CanvasLayer/UI" unique_id=482551195]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="TitleHolder" type="HBoxContainer" parent="CanvasLayer/UI" unique_id=735795111]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = -20
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/TitleHolder" unique_id=400544630]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="M1" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=1225348772]
+material = SubResource("ShaderMaterial_dfj8j")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "M"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="A" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=918331050]
+material = SubResource("ShaderMaterial_4l16e")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "A"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="S" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=381304856]
+material = SubResource("ShaderMaterial_85feu")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "S"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Q" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=673913250]
+material = SubResource("ShaderMaterial_66w26")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "Q"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="U1" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=2084875311]
+material = SubResource("ShaderMaterial_3ej01")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "U"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="E1" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=1513764604]
+material = SubResource("ShaderMaterial_w20ru")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "E"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="R" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=1491140715]
+material = SubResource("ShaderMaterial_1vfo2")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "R"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="U2" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=1496452487]
+material = SubResource("ShaderMaterial_hjcsb")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "U"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="M2" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=1433756806]
+material = SubResource("ShaderMaterial_2ktle")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "M"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="B" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=1332042071]
+material = SubResource("ShaderMaterial_l7b4h")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "B"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="L" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=1831802954]
+material = SubResource("ShaderMaterial_3mdse")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "L"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="E2" type="RichTextLabel" parent="CanvasLayer/UI/TitleHolder" unique_id=1451050512]
+material = SubResource("ShaderMaterial_8k5og")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("2_ch40n")
+theme_override_font_sizes/normal_font_size = 180
+text = "E
+"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/UI/TitleHolder" unique_id=290948282]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="MarginContainerMiddle" type="MarginContainer" parent="CanvasLayer/UI" unique_id=1716826753]
+layout_mode = 2
+
+[node name="PressAnyButtonToStart" type="RichTextLabel" parent="CanvasLayer/UI" unique_id=37118422]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("3_dfj8j")
+theme_override_font_sizes/normal_font_size = 60
+text = "PRESS ANY BUTTON TO START"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainerBottom" type="MarginContainer" parent="CanvasLayer/UI" unique_id=931394906]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2

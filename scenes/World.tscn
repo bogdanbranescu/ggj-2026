@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://clsxunupsko1o" path="res://scripts/World.gd" id="1_u6prc"]
 [ext_resource type="PackedScene" uid="uid://dxnwsxjikbiht" path="res://scenes/Fighter.tscn" id="2_1lgw5"]
 [ext_resource type="Script" uid="uid://c1ysxw4w7211r" path="res://scripts/StateManager.gd" id="2_h1bdy"]
+[ext_resource type="AudioStream" uid="uid://1lodnkqyr0kl" path="res://audio/music/battle.mp3" id="2_nrtoj"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_qcxh3"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_d4162"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ywcf5"]
@@ -26,6 +27,8 @@ size = Vector2(20, 1000)
 script = ExtResource("1_u6prc")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=525985914]
+stream = ExtResource("2_nrtoj")
+autoplay = true
 
 [node name="TimeKeeper" type="Timer" parent="." unique_id=939310887]
 
