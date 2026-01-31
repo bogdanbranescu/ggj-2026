@@ -28,6 +28,8 @@ const ABILITIES = {
     },
 }
 
+const basic_attack_damage := 4.0
+
 const starting_hp := 100
 
 const arena_width_halved := 1000

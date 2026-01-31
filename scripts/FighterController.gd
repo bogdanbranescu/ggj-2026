@@ -3,8 +3,8 @@ extends CharacterBody2D
 
 @onready var state = $StateChart
 @onready var sprite = $Sprite
-@onready var mask_holder = $MaskHolder
-@onready var hitboxes = %Hitboxes
+@onready var mask_holder = %MaskHolder
+@onready var hitbox = %Hitbox
 
 
 # Info
@@ -21,6 +21,7 @@ var facing := 1.0
 
 # Combat
 var is_attacking := false
+var is_recoiling := false
 
 
 func _ready() -> void:
@@ -44,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	velocity.x = direction * speed
 	velocity.y += gravity * delta
 	
-	if not is_attacking:
+	if not (is_attacking or is_recoiling):
 		update_facing()
 		move_and_slide()
 	
@@ -61,9 +62,12 @@ func act(delta: float) -> void:
 
 func attack_default() -> void:
 	is_attacking = true
+	hitbox.enable_detection(true)
 	sprite.play("base_attack")
 	await sprite.animation_finished
+	
 	is_attacking = false
+	hitbox.enable_detection(false)
 
 
 func move(_delta: float) -> void:
@@ -89,19 +93,38 @@ func collect_mask(mask: RigidBody2D) -> void:
 
 func get_damage(damage_amount: int) -> void:
 	hp = clamp(hp - damage_amount, 0, Global.starting_hp)
-
+	
+	is_recoiling = true
+	sprite.play("damaged")
+	flash_damage(true)
 	EventBus.player_damaged.emit(id, hp)
+	await sprite.animation_finished
+
+	is_recoiling = false
+	flash_damage(false)
+
 
 	if hp == 0:
 		die()
 
+
+func flash_damage(enable: bool) -> void:
+	var treshold_value
+
+	if enable:
+		treshold_value = 0.0;
+	else:
+		treshold_value = 1.0;
+		
+	sprite.material.set_shader_parameter("treshold", treshold_value)
+		
 
 func die() -> void:
 	EventBus.player_died.emit(id)
 
 
 func update_animations():
-	if is_attacking:
+	if is_attacking or is_recoiling:
 		return
 
 	if is_on_floor():
@@ -119,5 +142,5 @@ func update_animations():
 func update_facing():
 	if direction != 0:
 		facing = direction
-		hitboxes.scale.x = direction
+		hitbox.scale.x = direction
 		sprite.flip_h = (direction == -1)

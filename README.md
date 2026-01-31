@@ -14,10 +14,10 @@ Get Godot 4.6 from: https://godotengine.org/download/
 - [x] Mask spawning and physics
 - [ ] Mask stacking on character and stacked ability execution
 - [ ] Common fighting game mechanics (hitstop, blockstop, hit stun, block stun, maybe cancelling)
-- [ ] UI elements (health bars, time left, etc)
+- [x] UI elements (health bars, time left, etc)
 - [ ] Transitions (title -> stage, round -> next round, fight -> results)
 - [ ] Juice (damage flashing/shake, shaders, ability particles, intro/outro character/stage flourishes)
-- [ ] (optional) pause
+- [ ] ~~(optional) pause~~
 ### Audio
 - [ ] Battle BGM
 - [ ] SFX for moves/abilities
