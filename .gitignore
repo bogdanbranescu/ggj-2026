@@ -2,7 +2,7 @@
 .godot/
 .vscode/
 /android/
-_export/
+_exports/
 _log/
 
 # Mac
