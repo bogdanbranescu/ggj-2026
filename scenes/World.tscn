@@ -11,9 +11,10 @@
 [ext_resource type="Script" uid="uid://co8or8igfhm70" path="res://scripts/Camera.gd" id="5_hlk0d"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_7c4bj"]
 [ext_resource type="Script" uid="uid://cty4ggpa7ngot" path="res://scripts/MaskSpawner.gd" id="7_ygioq"]
+[ext_resource type="Script" uid="uid://b3crfnjfspji" path="res://scripts/UI.gd" id="12_7c4bj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1c63"]
-size = Vector2(3000, 20)
+size = Vector2(2000, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lgw5"]
 size = Vector2(20, 1000)
@@ -72,14 +73,14 @@ position = Vector2(0, 254)
 texture = ExtResource("5_0uv0p")
 
 [node name="LimitLeft" type="StaticBody2D" parent="Environment" unique_id=136285355]
-position = Vector2(-1500, -300)
+position = Vector2(-1000, -300)
 collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/LimitLeft" unique_id=48154889]
 shape = SubResource("RectangleShape2D_1lgw5")
 
 [node name="LimitRight" type="StaticBody2D" parent="Environment" unique_id=510609239]
-position = Vector2(1500, -300)
+position = Vector2(1000, -298)
 collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/LimitRight" unique_id=1813589498]
@@ -107,9 +108,69 @@ position = Vector2(316, 0)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=418506312]
 
-[node name="UIContainer" type="VBoxContainer" parent="UI" unique_id=1958297920]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UI" type="Control" parent="UI" unique_id=1084686285]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_7c4bj")
 
-[node name="Bars" type="HBoxContainer" parent="UI/UIContainer" unique_id=1442292978]
+[node name="UIContainer" type="VBoxContainer" parent="UI/UI" unique_id=1958297920]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.06
+anchor_right = 0.96
+anchor_bottom = 0.94
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bars" type="HBoxContainer" parent="UI/UI/UIContainer" unique_id=1442292978]
 layout_mode = 2
+alignment = 1
+
+[node name="Player1" type="HBoxContainer" parent="UI/UI/UIContainer/Bars" unique_id=1417865689]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="UI/UI/UIContainer/Bars/Player1" unique_id=108761374]
+layout_mode = 2
+texture = ExtResource("5_0uv0p")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/UI/UIContainer/Bars/Player1" unique_id=1358472944]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="Value" type="ProgressBar" parent="UI/UI/UIContainer/Bars/Player1" unique_id=1804939456]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+step = 1.0
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/UI/UIContainer/Bars" unique_id=1333730201]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Player2" type="HBoxContainer" parent="UI/UI/UIContainer/Bars" unique_id=1428558611]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Value" type="ProgressBar" parent="UI/UI/UIContainer/Bars/Player2" unique_id=1437464495]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+step = 1.0
+fill_mode = 1
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/UI/UIContainer/Bars/Player2" unique_id=531156410]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="UI/UI/UIContainer/Bars/Player2" unique_id=1575365034]
+layout_mode = 2
+texture = ExtResource("5_0uv0p")

@@ -23,11 +23,16 @@ func set_ability() -> void:
 			pass
 
 
+func use_ability() -> void:
+	print("USED ABILITY", Global.ABILITIES.keys()[ability as Global.ABILITIES])
+
+
 func _physics_process(_delta: float) -> void:
 	pass
 
 
 func apply_mask(area: Area2D) -> void:
 	if area.name == "CollectionArea":
-		area.get_parent().get_damage(25)
+		area.get_parent().collect_mask(self )
+		#area.get_parent().get_damage(25)
 		queue_free()

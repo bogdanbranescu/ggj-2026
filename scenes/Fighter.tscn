@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://xh47hmansvo4" path="res://scripts/FighterController.gd" id="1_l7220"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_0dnrr"]
+[ext_resource type="AudioStream" uid="uid://drs7decrlgy57" path="res://audio/sfx/jump.mp3" id="2_7p24r"]
 [ext_resource type="Texture2D" uid="uid://bywtj1husymy8" path="res://gfx/characters/fighter.png" id="2_w2163"]
+[ext_resource type="Script" uid="uid://cjawfv8j4ubw0" path="res://scripts/MaskStack.gd" id="3_65vn2"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_ogmxr"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_dsvqb"]
 
@@ -19,7 +21,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2163"]
 radius = 70.0
-height = 220.0
+height = 200.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2163"]
 size = Vector2(144, 20)
@@ -27,8 +29,14 @@ size = Vector2(144, 20)
 [node name="Fighter" type="CharacterBody2D" unique_id=2083199202]
 script = ExtResource("1_l7220")
 
+[node name="SoundJump" type="AudioStreamPlayer" parent="." unique_id=411547027]
+stream = ExtResource("2_7p24r")
+
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1377012607]
 sprite_frames = SubResource("SpriteFrames_stky8")
+
+[node name="MaskStack" type="Node2D" parent="." unique_id=1360918045]
+script = ExtResource("3_65vn2")
 
 [node name="CollectionArea" type="Area2D" parent="." unique_id=388875658]
 
