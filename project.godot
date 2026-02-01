@@ -22,7 +22,6 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 
 Global="*uid://bf3t8eicolysl"
 EventBus="*uid://bviolfm5ilcql"
-FmodManager="*uid://cds10pm7hwn3p"
 
 [display]
 
@@ -36,7 +35,7 @@ movie_writer/movie_file="/Users/bnx/Desktop/_masked_fighter/_rec/recording.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/fmod/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
 [input]
 
