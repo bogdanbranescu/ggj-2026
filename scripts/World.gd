@@ -9,7 +9,10 @@ func _ready() -> void:
     EventBus.player_died.connect(game_over)
 
     timekeeper.start()
+
+    await get_tree().create_timer(0.5).timeout
     # TODO fight setup
+    $AnnouncerFIGHT.play()
 
 
 func game_over(id: int) -> void:

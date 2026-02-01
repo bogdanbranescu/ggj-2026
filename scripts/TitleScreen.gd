@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_key_input(event):
-    if event.is_pressed():
+    if Input.is_action_just_pressed("action1") or Input.is_action_just_pressed("action2"):
         go_to_game()
 
 

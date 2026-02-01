@@ -3,16 +3,17 @@
 [ext_resource type="Script" uid="uid://clsxunupsko1o" path="res://scripts/World.gd" id="1_u6prc"]
 [ext_resource type="PackedScene" uid="uid://dxnwsxjikbiht" path="res://scenes/Fighter.tscn" id="2_1lgw5"]
 [ext_resource type="Script" uid="uid://c1ysxw4w7211r" path="res://scripts/StateManager.gd" id="2_h1bdy"]
-[ext_resource type="AudioStream" uid="uid://1lodnkqyr0kl" path="res://audio/music/battle.mp3" id="2_nrtoj"]
+[ext_resource type="AudioStream" uid="uid://d0dfjciqdk6ps" path="res://audio/music/battle_music.wav" id="2_i4b1j"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_qcxh3"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_d4162"]
+[ext_resource type="AudioStream" uid="uid://dnfrvla07pi1w" path="res://audio/sfx/fight.wav" id="3_i4b1j"]
+[ext_resource type="AudioStream" uid="uid://j6tpe0phvr2k" path="res://audio/sfx/end_knockout.wav" id="4_c0d7e"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ywcf5"]
 [ext_resource type="Texture2D" uid="uid://cc5by7ejn8dj8" path="res://gfx/environment/icon.svg" id="5_0uv0p"]
-[ext_resource type="Texture2D" uid="uid://bo0yfhy2fu12q" path="res://gfx/environment/background-far.png" id="5_b3faq"]
 [ext_resource type="Script" uid="uid://co8or8igfhm70" path="res://scripts/Camera.gd" id="5_hlk0d"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_7c4bj"]
 [ext_resource type="Script" uid="uid://cty4ggpa7ngot" path="res://scripts/MaskSpawner.gd" id="7_ygioq"]
-[ext_resource type="Texture2D" uid="uid://hbel2r8gfqt7" path="res://gfx/environment/Titllescreen_BG_Tile00001.png" id="8_nrtoj"]
+[ext_resource type="Texture2D" uid="uid://cxegsudfpucdm" path="res://gfx/environment/Stage_tile.png" id="8_i4b1j"]
 [ext_resource type="Script" uid="uid://b3crfnjfspji" path="res://scripts/UI.gd" id="12_7c4bj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1c63"]
@@ -24,12 +25,24 @@ size = Vector2(20, 1000)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hlk0d"]
 size = Vector2(20, 1000)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1tcx"]
+bg_color = Color(0.101960786, 0.0627451, 0.17254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0d7e"]
+bg_color = Color(0.78039217, 0.0627451, 0.17254902, 1)
+
 [node name="World" type="Node2D" unique_id=98757806]
 script = ExtResource("1_u6prc")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=525985914]
-stream = ExtResource("2_nrtoj")
+stream = ExtResource("2_i4b1j")
 autoplay = true
+
+[node name="AnnouncerFIGHT" type="AudioStreamPlayer" parent="." unique_id=42646547]
+stream = ExtResource("3_i4b1j")
+
+[node name="AnnouncerWIN" type="AudioStreamPlayer" parent="." unique_id=1846012000]
+stream = ExtResource("4_c0d7e")
 
 [node name="TimeKeeper" type="Timer" parent="." unique_id=939310887]
 
@@ -75,10 +88,10 @@ offset_bottom = 8487.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("8_nrtoj")
+texture = ExtResource("8_i4b1j")
 stretch_mode = 1
 
-[node name="Backdrop" type="TextureRect" parent="Environment" unique_id=444095987]
+[node name="Backdrop" type="ColorRect" parent="Environment" unique_id=1901950974]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -89,8 +102,7 @@ offset_bottom = 2887.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("5_b3faq")
-expand_mode = 2
+color = Color(1, 0.93333334, 0.75, 1)
 
 [node name="Ground" type="StaticBody2D" parent="Environment" unique_id=821027775]
 collision_layer = 5
@@ -163,6 +175,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Icon" type="TextureRect" parent="UI/UI/UIContainer/Bars/Player1" unique_id=108761374]
+visible = false
 layout_mode = 2
 texture = ExtResource("5_0uv0p")
 
@@ -171,9 +184,12 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
 [node name="Value" type="ProgressBar" parent="UI/UI/UIContainer/Bars/Player1" unique_id=1804939456]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_o1tcx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c0d7e")
 step = 1.0
 show_percentage = false
 
@@ -187,9 +203,12 @@ size_flags_horizontal = 3
 alignment = 2
 
 [node name="Value" type="ProgressBar" parent="UI/UI/UIContainer/Bars/Player2" unique_id=1437464495]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_o1tcx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c0d7e")
 step = 1.0
 fill_mode = 1
 show_percentage = false
@@ -199,5 +218,6 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="UI/UI/UIContainer/Bars/Player2" unique_id=1575365034]
+visible = false
 layout_mode = 2
 texture = ExtResource("5_0uv0p")

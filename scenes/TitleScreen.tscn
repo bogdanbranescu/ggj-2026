@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://u22rtsuhrwpx"]
 
 [ext_resource type="Script" uid="uid://dos4blecek036" path="res://scripts/TitleScreen.gd" id="1_7gw6n"]
-[ext_resource type="AudioStream" uid="uid://d0lh2hd2pe8v7" path="res://audio/music/title.mp3" id="2_8k5og"]
+[ext_resource type="AudioStream" uid="uid://dq12ht64qpmpe" path="res://audio/music/title_screen.wav" id="2_1vfo2"]
 [ext_resource type="FontFile" uid="uid://dxg02gfagxjgn" path="res://ui/fonts/DirtyBrush.ttf" id="2_ch40n"]
 [ext_resource type="Shader" uid="uid://bqj1h1p1g3gpa" path="res://ui/shader/title_background.gdshader" id="3_85feu"]
 [ext_resource type="FontFile" uid="uid://dbha2xtkpvmx4" path="res://ui/fonts/mabook/Mabook.ttf" id="3_dfj8j"]
@@ -196,7 +196,7 @@ shader_parameter/offset = 1.200000057
 script = ExtResource("1_7gw6n")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1266046835]
-stream = ExtResource("2_8k5og")
+stream = ExtResource("2_1vfo2")
 autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=894902834]
@@ -845,7 +845,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20
 theme_override_fonts/normal_font = ExtResource("3_dfj8j")
 theme_override_font_sizes/normal_font_size = 60
-text = "PRESS ANY BUTTON TO START"
+text = "PRESS \"E\" or \"O\" TO START"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -32,7 +32,7 @@ const ABILITIES = {
     },
 }
 
-const basic_attack_damage := 4.0
+const basic_attack_damage := 9.0
 const basic_attack_recovery := 0.4
 
 const starting_hp := 100

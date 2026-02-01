@@ -81,6 +81,7 @@ func attack_default() -> void:
 	is_attacking = true
 	hitbox.enable_detection(true)
 	sprite.play("base_attack")
+	$Sounds/Punch.play()
 	await sprite.animation_finished
 	
 	is_attacking = false
@@ -159,6 +160,8 @@ func update_animations():
 			sprite.play("idle")
 		else:
 			sprite.play("walk")
+			if !$Sounds/Steps.playing:
+				$Sounds/Steps.play()
 	else:
 		if velocity.y < 0:
 			sprite.play("jump")

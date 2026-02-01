@@ -2,17 +2,24 @@
 
 [ext_resource type="Script" uid="uid://xh47hmansvo4" path="res://scripts/FighterController.gd" id="1_l7220"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_0dnrr"]
-[ext_resource type="AudioStream" uid="uid://drs7decrlgy57" path="res://audio/sfx/jump.mp3" id="2_7p24r"]
+[ext_resource type="AudioStream" uid="uid://y0lxagm6k4so" path="res://audio/sfx/jump.wav" id="2_s7iku"]
+[ext_resource type="AudioStream" uid="uid://c40ekbyl3cc0v" path="res://audio/sfx/punch.wav" id="3_358vv"]
 [ext_resource type="Texture2D" uid="uid://4l4ppisqso1x" path="res://gfx/characters/P1/Idle/Idle_01.png" id="3_cu12w"]
 [ext_resource type="Texture2D" uid="uid://bn2bduqr0chgl" path="res://gfx/characters/P1/Attack/Base_Atk_01.png" id="3_ftax0"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_ogmxr"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_dsvqb"]
 [ext_resource type="Texture2D" uid="uid://ch5ns0rr7uf3t" path="res://gfx/characters/P1/Idle/Idle_02.png" id="4_ftax0"]
+[ext_resource type="AudioStream" uid="uid://bep332ad6jcuj" path="res://audio/sfx/steps/Step1.wav" id="4_pfjmu"]
 [ext_resource type="Texture2D" uid="uid://bf364gil6lgoo" path="res://gfx/characters/P1/Attack/Base_Atk_02.png" id="4_w3ptb"]
+[ext_resource type="AudioStream" uid="uid://d0d5ecah6ly5e" path="res://audio/sfx/steps/Step2.wav" id="5_0t17c"]
 [ext_resource type="Texture2D" uid="uid://br3fijvhukivf" path="res://gfx/characters/P1/Attack/Base_Atk_03.png" id="5_r1c5o"]
 [ext_resource type="Texture2D" uid="uid://bdlsgs0hb3x50" path="res://gfx/characters/P1/Idle/Idle_03.png" id="5_w3ptb"]
 [ext_resource type="Texture2D" uid="uid://djh3ww6mfhgpg" path="res://gfx/characters/P1/Attack/Base_Atk_04.png" id="6_3ou6g"]
+[ext_resource type="AudioStream" uid="uid://bgvyxmwksjvnn" path="res://audio/sfx/steps/Step3.wav" id="6_ttme4"]
 [ext_resource type="Texture2D" uid="uid://cp5svfe1yesqy" path="res://gfx/characters/P1/Recoil/Recoil_01.png" id="7_iohhj"]
+[ext_resource type="AudioStream" uid="uid://bt581slunq0qv" path="res://audio/sfx/steps/Step4.wav" id="7_yr1r8"]
+[ext_resource type="AudioStream" uid="uid://bm1fb015kxaqa" path="res://audio/sfx/steps/Step5.wav" id="8_jnlbf"]
+[ext_resource type="AudioStream" uid="uid://dn6kbbrg1ia1y" path="res://audio/sfx/steps/Step6.wav" id="9_my8ku"]
 [ext_resource type="Texture2D" uid="uid://dat2qag01eiw6" path="res://gfx/characters/P1/Jump/Jump_01.png" id="10_4e5sj"]
 [ext_resource type="Texture2D" uid="uid://ukaekb688036" path="res://gfx/characters/P1/Jump/Jump_02.png" id="11_iohhj"]
 [ext_resource type="Texture2D" uid="uid://cp4tavj6tlnh5" path="res://gfx/characters/P1/Walk/walk_01.png" id="12_s7iku"]
@@ -22,6 +29,29 @@
 [ext_resource type="Texture2D" uid="uid://byn1ihlkrjboa" path="res://gfx/characters/P1/Walk/walk_05.png" id="16_cdstc"]
 [ext_resource type="Texture2D" uid="uid://fksk8j2qhlg7" path="res://gfx/characters/P1/Walk/walk_06.png" id="17_jc1kg"]
 [ext_resource type="Script" uid="uid://c3k6xp8shhxxr" path="res://scripts/Hitbox.gd" id="19_s7iku"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_iohhj"]
+playback_mode = 1
+random_pitch = 1.2599211
+streams_count = 1
+stream_0/stream = ExtResource("2_s7iku")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s7iku"]
+playback_mode = 1
+random_pitch = 1.3348398
+streams_count = 1
+stream_0/stream = ExtResource("3_358vv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_358vv"]
+random_pitch = 1.1892071
+random_volume_offset_db = 2.0
+streams_count = 6
+stream_0/stream = ExtResource("4_pfjmu")
+stream_1/stream = ExtResource("5_0t17c")
+stream_2/stream = ExtResource("6_ttme4")
+stream_3/stream = ExtResource("7_yr1r8")
+stream_4/stream = ExtResource("8_jnlbf")
+stream_5/stream = ExtResource("9_my8ku")
 
 [sub_resource type="Shader" id="Shader_s7iku"]
 code = "shader_type canvas_item;
@@ -148,13 +178,17 @@ script = ExtResource("1_l7220")
 [node name="Sounds" type="Node" parent="." unique_id=217332313]
 
 [node name="Jump" type="AudioStreamPlayer" parent="Sounds" unique_id=411547027]
-stream = ExtResource("2_7p24r")
+stream = SubResource("AudioStreamRandomizer_iohhj")
 
 [node name="Punch" type="AudioStreamPlayer" parent="Sounds" unique_id=2088674879]
+stream = SubResource("AudioStreamRandomizer_s7iku")
 
 [node name="Fireball" type="AudioStreamPlayer" parent="Sounds" unique_id=367519213]
 
 [node name="Dash" type="AudioStreamPlayer" parent="Sounds" unique_id=564812488]
+
+[node name="Steps" type="AudioStreamPlayer" parent="Sounds" unique_id=934161130]
+stream = SubResource("AudioStreamRandomizer_358vv")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1377012607]
 texture_filter = 5

@@ -24,6 +24,7 @@ func generate_spawning_points() -> void:
 
 
 func spawn_and_restart() -> void:
+	return
 	spawn()
 	reset_timer()
 
