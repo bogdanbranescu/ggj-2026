@@ -13,6 +13,11 @@ func enable_detection(enable: bool) -> void:
 
 
 func apply_hit(area: Area2D) -> void:
-	print(self.get_tree().root)
-	if area.name == "CollectionArea" and area.get_parent() != self.get_node("../.."): # Don't hit yourself!
-		area.get_parent().get_damage(Global.basic_attack_damage)
+	var this_fighter = self.get_node("../..")
+	var receiving_fighter = area.get_parent()
+
+	if area.name == "CollectionArea" and this_fighter != receiving_fighter: # Don't hit yourself!
+		var damage_direction = ((
+			receiving_fighter.position.x - this_fighter.position.x) * Vector2.RIGHT
+		).normalized()
+		area.get_parent().take_damage(Global.basic_attack_damage, damage_direction)

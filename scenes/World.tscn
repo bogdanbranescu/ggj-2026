@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://co8or8igfhm70" path="res://scripts/Camera.gd" id="5_hlk0d"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_7c4bj"]
 [ext_resource type="Script" uid="uid://cty4ggpa7ngot" path="res://scripts/MaskSpawner.gd" id="7_ygioq"]
+[ext_resource type="Texture2D" uid="uid://hbel2r8gfqt7" path="res://gfx/environment/Titllescreen_BG_Tile00001.png" id="8_nrtoj"]
 [ext_resource type="Script" uid="uid://b3crfnjfspji" path="res://scripts/UI.gd" id="12_7c4bj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1c63"]
@@ -61,10 +62,35 @@ script = ExtResource("4_ywcf5")
 [node name="Outro" type="Node" parent="StateManager/StateChart/Mode" unique_id=1479262261]
 script = ExtResource("4_ywcf5")
 
-[node name="Backdrop" type="Sprite2D" parent="." unique_id=537574637]
-texture = ExtResource("5_b3faq")
-
 [node name="Environment" type="Node2D" parent="." unique_id=1303032420]
+
+[node name="Solid" type="TextureRect" parent="Environment" unique_id=1543143857]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1906.0
+offset_top = -1513.0
+offset_right = 13094.0
+offset_bottom = 8487.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_nrtoj")
+stretch_mode = 1
+
+[node name="Backdrop" type="TextureRect" parent="Environment" unique_id=444095987]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -990.0
+offset_top = -709.0
+offset_right = 6930.0
+offset_bottom = 2887.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_b3faq")
+expand_mode = 2
 
 [node name="Ground" type="StaticBody2D" parent="Environment" unique_id=821027775]
 collision_layer = 5
@@ -72,10 +98,6 @@ collision_layer = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Ground" unique_id=604389993]
 position = Vector2(0, 200)
 shape = SubResource("RectangleShape2D_d1c63")
-
-[node name="Sprite2D" type="Sprite2D" parent="Environment/Ground" unique_id=1357961194]
-position = Vector2(0, 254)
-texture = ExtResource("5_0uv0p")
 
 [node name="LimitLeft" type="StaticBody2D" parent="Environment" unique_id=136285355]
 position = Vector2(-1000, -300)
@@ -106,7 +128,7 @@ position_smoothing_enabled = true
 script = ExtResource("5_hlk0d")
 
 [node name="Fighter_1" parent="Characters" unique_id=2083199202 instance=ExtResource("2_1lgw5")]
-position = Vector2(-316, 0)
+position = Vector2(-316, 1)
 
 [node name="Fighter_2" parent="Characters" unique_id=937528637 instance=ExtResource("2_1lgw5")]
 position = Vector2(316, 0)

@@ -35,5 +35,3 @@ func apply_mask(area: Area2D) -> void:
 	if area.name == "CollectionArea":
 		area.get_parent().collect_mask(self )
 		call_deferred("enable_physics", false)
-		#area.get_parent().get_damage(25)
-		#queue_free()

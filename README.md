@@ -18,12 +18,21 @@ Get Godot 4.6 from: https://godotengine.org/download/
 - [ ] Transitions (title -> stage, round -> next round, fight -> results)
 - [ ] Juice (damage flashing/shake, shaders, ability particles, intro/outro character/stage flourishes)
 - [ ] ~~(optional) pause~~
-### Audio
-- [ ] Battle BGM
-- [ ] SFX for moves/abilities
-- [ ] Victory jingle
-- [ ] (maybe) Announcer voice, character barks
-- [ ] Title screen BGM (maybe a filtered/simplified version of the battle music)
+### Music
+- [x] Battle BGM
+- [x] Title screen BGM (maybe a filtered/simplified version of the battle music)
+### SFX
+- [ ] jump - movement
+- [ ] jump - impact ?
+- [ ] steps (4-5)
+- [ ] basic punch
+- [ ] mask punch (punchier!)
+- [ ] fireball emission
+- [ ] fireball impact
+- [ ] dash
+- [ ] shield
+- [ ] announcer - start battle: FIGHT!
+- [ ] announcer - win: KNOCKOUT! / WIN!
 ### Art
 - [ ] Character(s) - likely one palette swapped character
 - [ ] Masks (static + animated ability)

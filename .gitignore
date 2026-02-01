@@ -4,6 +4,7 @@
 /android/
 _exports/
 _log/
+_rec/
 
 # Mac
 .DS_Store

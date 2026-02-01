@@ -28,9 +28,15 @@ code = "shader_type canvas_item;
 
 uniform float treshold = 1.0;
 uniform float speed = 25.0;
+uniform int fighter_id;
 
 void fragment() {
-	vec4 color = texture(TEXTURE, UV);
+	if (fighter_id == 1) {
+		COLOR.rgb = vec3(0.05, 0.25, 0.05);	
+	} else {
+		COLOR.rgb = vec3(0.25, 0.05, 0.05);	
+	}
+	
 	if (sin(TIME * speed) > treshold) {
 		COLOR.rgb = vec3(0.8, 0.8, 0.8);
 	}
@@ -41,6 +47,7 @@ resource_local_to_scene = true
 shader = SubResource("Shader_s7iku")
 shader_parameter/treshold = 1.0
 shader_parameter/speed = 25.0
+shader_parameter/fighter_id = 0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_stky8"]
 animations = [{
@@ -62,7 +69,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 3.0,
+"duration": 2.0,
 "texture": ExtResource("7_iohhj")
 }],
 "loop": false,
@@ -127,7 +134,7 @@ animations = [{
 radius = 100.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2163"]
-radius = 100.0
+radius = 80.0
 height = 200.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2163"]

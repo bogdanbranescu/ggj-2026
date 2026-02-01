@@ -26,6 +26,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
+[editor]
+
+movie_writer/movie_file="/Users/bnx/Desktop/_masked_fighter/_rec/recording.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/fmod/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
