@@ -24,8 +24,8 @@ func generate_spawning_points() -> void:
 
 
 func spawn_and_restart() -> void:
-	return
-	spawn()
+	if get_child_count() < Global.environment_mask_limit + 1:
+		spawn()
 	reset_timer()
 
 

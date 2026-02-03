@@ -9,12 +9,13 @@
 [ext_resource type="AudioStream" uid="uid://dnfrvla07pi1w" path="res://audio/sfx/fight.wav" id="3_i4b1j"]
 [ext_resource type="AudioStream" uid="uid://j6tpe0phvr2k" path="res://audio/sfx/end_knockout.wav" id="4_c0d7e"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ywcf5"]
-[ext_resource type="Texture2D" uid="uid://cc5by7ejn8dj8" path="res://gfx/environment/icon.svg" id="5_0uv0p"]
 [ext_resource type="Script" uid="uid://co8or8igfhm70" path="res://scripts/Camera.gd" id="5_hlk0d"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_7c4bj"]
 [ext_resource type="Script" uid="uid://cty4ggpa7ngot" path="res://scripts/MaskSpawner.gd" id="7_ygioq"]
 [ext_resource type="Texture2D" uid="uid://cxegsudfpucdm" path="res://gfx/environment/Stage_tile.png" id="8_i4b1j"]
 [ext_resource type="Script" uid="uid://b3crfnjfspji" path="res://scripts/UI.gd" id="12_7c4bj"]
+[ext_resource type="Texture2D" uid="uid://dyua2xrsed6hy" path="res://ui/character_portrait.tres" id="15_o1tcx"]
+[ext_resource type="Shader" uid="uid://bqculv2ulltgq" path="res://ui/shader/damage_flash.gdshader" id="15_rpuxp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1c63"]
 size = Vector2(2000, 20)
@@ -25,23 +26,58 @@ size = Vector2(20, 1000)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hlk0d"]
 size = Vector2(20, 1000)
 
+[sub_resource type="Shader" id="Shader_o1tcx"]
+code = "shader_type canvas_item;
+
+uniform float treshold = 1.0;
+uniform float speed = 25.0;
+uniform int fighter_id;
+
+void fragment() {
+	if (fighter_id == 1) {
+		COLOR.rgb = vec3(0.93, 0.25, 0.14);	
+	} else {
+		COLOR.rgb = vec3(0.33, 0.51, 0.25);	
+	}
+	
+	if (sin(TIME * speed) > treshold) {
+		COLOR.rgb = vec3(1.0, 1.0, 1.0);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nthub"]
+shader = SubResource("Shader_o1tcx")
+shader_parameter/treshold = 1.0
+shader_parameter/speed = 25.0
+shader_parameter/fighter_id = 1
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1tcx"]
 bg_color = Color(0.101960786, 0.0627451, 0.17254902, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0d7e"]
 bg_color = Color(0.78039217, 0.0627451, 0.17254902, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o1tcx"]
+shader = ExtResource("15_rpuxp")
+shader_parameter/treshold = 1.0
+shader_parameter/speed = 25.0
+shader_parameter/fighter_id = 0
+
 [node name="World" type="Node2D" unique_id=98757806]
 script = ExtResource("1_u6prc")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=525985914]
+process_mode = 3
 stream = ExtResource("2_i4b1j")
+volume_db = -3.0
 autoplay = true
 
 [node name="AnnouncerFIGHT" type="AudioStreamPlayer" parent="." unique_id=42646547]
+process_mode = 3
 stream = ExtResource("3_i4b1j")
 
 [node name="AnnouncerWIN" type="AudioStreamPlayer" parent="." unique_id=1846012000]
+process_mode = 3
 stream = ExtResource("4_c0d7e")
 
 [node name="TimeKeeper" type="Timer" parent="." unique_id=939310887]
@@ -134,7 +170,7 @@ script = ExtResource("7_ygioq")
 [node name="Characters" type="Node2D" parent="." unique_id=1944501478]
 
 [node name="Camera" type="Camera2D" parent="Characters" unique_id=2044144339]
-position = Vector2(2, -11)
+position = Vector2(1, -1)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 script = ExtResource("5_hlk0d")
@@ -175,9 +211,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Icon" type="TextureRect" parent="UI/UI/UIContainer/Bars/Player1" unique_id=108761374]
-visible = false
+material = SubResource("ShaderMaterial_nthub")
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-texture = ExtResource("5_0uv0p")
+texture = ExtResource("15_o1tcx")
+expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/UI/UIContainer/Bars/Player1" unique_id=1358472944]
 custom_minimum_size = Vector2(30, 0)
@@ -218,6 +256,9 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="UI/UI/UIContainer/Bars/Player2" unique_id=1575365034]
-visible = false
+material = SubResource("ShaderMaterial_o1tcx")
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-texture = ExtResource("5_0uv0p")
+texture = ExtResource("15_o1tcx")
+expand_mode = 1
+flip_h = true

@@ -17,7 +17,5 @@ func apply_hit(area: Area2D) -> void:
 	var receiving_fighter = area.get_parent()
 
 	if area.name == "CollectionArea" and this_fighter != receiving_fighter: # Don't hit yourself!
-		var damage_direction = ((
-			receiving_fighter.position.x - this_fighter.position.x) * Vector2.RIGHT
-		).normalized()
+		var damage_direction = (this_fighter.facing * Vector2.RIGHT).normalized()
 		area.get_parent().take_damage(Global.basic_attack_damage, damage_direction)

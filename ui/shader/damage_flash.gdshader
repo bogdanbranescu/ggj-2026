@@ -6,12 +6,12 @@ uniform int fighter_id;
 
 void fragment() {
 	if (fighter_id == 1) {
-		COLOR.rgb = vec3(0.0, 0.0, 0.3);	
+		COLOR.rgb = vec3(0.93, 0.25, 0.14);	
 	} else {
-		COLOR.rgb = vec3(0.9, 0.0, 0.0);	
+		COLOR.rgb = vec3(0.33, 0.51, 0.25);	
 	}
 	
 	if (sin(TIME * speed) > treshold) {
-		COLOR.rgb = vec3(0.8, 0.8, 0.8);
+		COLOR.rgb = vec3(1.0, 1.0, 1.0);
 	}
 }

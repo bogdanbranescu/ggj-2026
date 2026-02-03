@@ -20,10 +20,10 @@ func _on_main_entered() -> void:
 
 func _on_outro_entered() -> void:
 	print("GAME OVER")
+	# TODO handle music, player movement, masks, win panel
 	var sound = get_node("../AnnouncerWIN")
 	sound.play()
 	await sound.finished
 	await get_tree().create_timer(0.5).timeout
 	
-	get_tree().quit()
-	# TODO handle music, player movement, masks, win panel
+	get_tree().change_scene_to_file("res://scenes/TitleScreen.tscn")

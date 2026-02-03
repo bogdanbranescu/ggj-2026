@@ -19,6 +19,8 @@ var jump_force := 1500
 var direction := 0.0
 var facing := 1.0
 
+var is_waiting := false
+
 # Combat
 var knockback_velocity: Vector2
 var knockback_force := 2000
@@ -28,8 +30,16 @@ var is_attacking := false
 var is_recovering := false
 var is_hitstunned := false
 
+var current_mask: RigidBody2D
+
+var has_died := false
+
 
 func _ready() -> void:
+	EventBus.player_movement_enabled.connect(func(): is_waiting = false)
+	EventBus.player_movement_disabled.connect(func(): is_waiting = true)
+
+
 	id = int(self.name.split("_")[-1])
 	hp = Global.starting_hp
 
@@ -37,12 +47,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	print(is_attacking)
 	var is_jump_available = is_on_floor()
 
-	if not is_hitstunned:
-		act(delta)
-		move(delta)
+	if not (is_hitstunned or has_died):
+		if not is_waiting:
+			act(delta)
+			move(delta)
 
 		if Input.is_action_just_pressed("up" + str(id)): # and not has_died:
 			if is_jump_available:
@@ -104,13 +114,18 @@ func jump(force) -> void:
 	# jump_hold_timer.start()
 	# jump_buffer_timer.stop()
 
-	$Sounds/Jump.play() # TODO add actual jump sound
+	$Sounds/Jump.play()
 
 
 func collect_mask(mask: RigidBody2D) -> void:
-	if mask_holder.get_child_count() > 0:
-		mask_holder.get_child(0).queue_free()
-	mask.call_deferred("reparent", self.mask_holder)
+	for child in mask_holder.get_children():
+		child.queue_free()
+
+	# current_mask = mask
+	# if mask_holder.get_child_count() > 0:
+	# 	mask_holder.get_child(0).queue_free()
+	
+	mask.call_deferred("reparent", self.mask_holder, true)
 
 
 func take_damage(damage_amount: int, damage_direction: Vector2) -> void:
@@ -148,6 +163,7 @@ func flash_damage(enable: bool) -> void:
 		
 
 func die() -> void:
+	has_died = true
 	EventBus.player_died.emit(id)
 
 
