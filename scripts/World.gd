@@ -18,7 +18,6 @@ func _ready() -> void:
 	# TODO camera flourish
 	$AnnouncerFIGHT.play()
 
-
 func game_over(id: int) -> void:
 	# TODO winner camera flourish
 	# TODO disable actions

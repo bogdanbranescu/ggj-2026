@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bryy67pg4dyft" path="res://scripts/Mask.gd" id="1_eic0r"]
 [ext_resource type="Texture2D" uid="uid://ds5uhxms1813p" path="res://gfx/characters/Masks/Dash/Mask/Dash_mask_01_idle.png" id="2_2fed6"]
+[ext_resource type="AudioStream" uid="uid://c40ekbyl3cc0v" path="res://audio/sfx/punch.wav" id="2_2grb2"]
 [ext_resource type="Texture2D" uid="uid://dfiqgiee4x6ku" path="res://gfx/characters/Masks/Dash/Mask/Dash_mask_02_windup1.png" id="3_p32sj"]
 [ext_resource type="Texture2D" uid="uid://c3hw38mt6bb03" path="res://gfx/characters/Masks/Dash/Mask/Dash_mask_03_windup2.png" id="4_wqnum"]
 [ext_resource type="Texture2D" uid="uid://bp1uglgk1x4bc" path="res://gfx/characters/Masks/Dash/Mask/Dash_mask_04_active1.png" id="5_nx0ud"]
@@ -105,6 +106,7 @@ script = ExtResource("1_eic0r")
 process_mode = 3
 
 [node name="punch" type="AudioStreamPlayer" parent="Sound" unique_id=1484758778]
+stream = ExtResource("2_2grb2")
 
 [node name="dash" type="AudioStreamPlayer" parent="Sound" unique_id=433822071]
 

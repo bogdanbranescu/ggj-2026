@@ -319,7 +319,7 @@ height = 200.0
 size = Vector2(144, 20)
 
 [node name="Fighter" type="CharacterBody2D" unique_id=2083199202]
-position = Vector2(0, -1)
+position = Vector2(-2, -2)
 collision_layer = 0
 script = ExtResource("1_l7220")
 

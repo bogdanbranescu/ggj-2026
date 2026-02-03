@@ -7,8 +7,8 @@ extends Camera2D
 }
 
 var zoom_base := 0.6
-var winner_zoom := 3.0
-var loser_zoom := 1.0
+var winner_zoom := 2.8
+var loser_zoom := 2.8
 var initial_position := position
 
 var is_showing_outro := false
@@ -44,12 +44,15 @@ func _physics_process(delta: float) -> void:
 
 
 func show_loser(delta: float) -> void:
-	position = position.move_toward(fighters[loser_id].position, 300 * delta)
-	zoom = zoom.move_toward(loser_zoom * Vector2.ONE, 3.0 * delta)
+	position = position.move_toward(fighters[loser_id].position, 10000 * delta)
+	zoom = zoom.move_toward(loser_zoom * Vector2.ONE, 20.0 * delta)
 	if position == fighters[loser_id].position and zoom == loser_zoom * Vector2.ONE:
+		await get_tree().create_timer(0.8).timeout
+		
 		has_shown_loser = true
+		position_smoothing_enabled = false
 
 
 func show_winner(delta: float) -> void:
-	position = position.move_toward(fighters[winner_id].position, 1000 * delta)
-	zoom = zoom.move_toward(winner_zoom * Vector2.ONE, 3.0 * delta)
+	position = position.move_toward(fighters[winner_id].position, 5000 * delta)
+	zoom = zoom.move_toward(winner_zoom * Vector2.ONE, 20.0 * delta)

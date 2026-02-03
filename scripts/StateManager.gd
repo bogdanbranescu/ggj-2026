@@ -21,9 +21,18 @@ func _on_main_entered() -> void:
 func _on_outro_entered() -> void:
 	print("GAME OVER")
 	# TODO handle music, player movement, masks, win panel
-	var sound = get_node("../AnnouncerWIN")
-	sound.play()
-	await sound.finished
-	await get_tree().create_timer(0.5).timeout
+	
+	get_node("../BGM").stop()
+	get_node("../VictoryJingle").play()
+	
+	var sfx = get_node("../AnnouncerKNOCKOUT")
+	sfx.play()
+	await sfx.finished
+	
+	sfx = get_node("../AnnouncerWIN")
+	sfx.play()
+	await sfx.finished
+	
+	await get_tree().create_timer(1.5).timeout
 	
 	get_tree().change_scene_to_file("res://scenes/TitleScreen.tscn")

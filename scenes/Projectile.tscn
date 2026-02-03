@@ -1,3 +1,14 @@
 [gd_scene format=3 uid="uid://b2svygcrkdsck"]
 
-[node name="Projectile" type="Node2D" unique_id=1647871315]
+[ext_resource type="Script" uid="uid://bqnkt5jcuudtr" path="res://scripts/Projectile.gd" id="1_dprbf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dprbf"]
+radius = 50.0
+
+[node name="Projectile" type="Area2D" unique_id=813633531]
+script = ExtResource("1_dprbf")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1415368477]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=280043761]
+shape = SubResource("CircleShape2D_dprbf")

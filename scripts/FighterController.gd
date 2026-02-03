@@ -15,7 +15,7 @@ var is_holding_mask: bool
 # Movement
 @export var gravity = 4000
 @export var speed = 500
-var jump_force := 1500
+var jump_force := 1800
 var direction := 0.0
 var facing := 1.0
 
@@ -84,7 +84,7 @@ func act(_delta: float) -> void:
 		if mask_holder.get_child_count() == 0:
 			attack_default()
 		else:
-			mask_holder.get_child(0).use_ability()
+			current_mask.use_ability()
 
 
 func attack_default() -> void:
@@ -118,10 +118,9 @@ func jump(force) -> void:
 
 
 func collect_mask(mask: RigidBody2D) -> void:
-	for child in mask_holder.get_children():
-		child.queue_free()
-
-	# current_mask = mask
+	# for child in mask_holder.get_children():
+	# 	child.queue_free()
+	current_mask = mask
 	# if mask_holder.get_child_count() > 0:
 	# 	mask_holder.get_child(0).queue_free()
 	
@@ -168,6 +167,10 @@ func die() -> void:
 
 
 func update_animations():
+	if has_died:
+		sprite.play("damaged")
+		return
+
 	if is_attacking or is_hitstunned:
 		return
 

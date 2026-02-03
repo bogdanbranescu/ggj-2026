@@ -10,7 +10,9 @@
 [ext_resource type="AudioStream" uid="uid://j6tpe0phvr2k" path="res://audio/sfx/end_knockout.wav" id="4_c0d7e"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ywcf5"]
 [ext_resource type="Script" uid="uid://co8or8igfhm70" path="res://scripts/Camera.gd" id="5_hlk0d"]
+[ext_resource type="AudioStream" uid="uid://k5nv6hgmy53e" path="res://audio/sfx/you_win.wav" id="5_rpuxp"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_7c4bj"]
+[ext_resource type="AudioStream" uid="uid://dsgeooy7tu6mw" path="res://audio/sfx/victory_jingle.wav" id="6_nthub"]
 [ext_resource type="Script" uid="uid://cty4ggpa7ngot" path="res://scripts/MaskSpawner.gd" id="7_ygioq"]
 [ext_resource type="Texture2D" uid="uid://cxegsudfpucdm" path="res://gfx/environment/Stage_tile.png" id="8_i4b1j"]
 [ext_resource type="Script" uid="uid://b3crfnjfspji" path="res://scripts/UI.gd" id="12_7c4bj"]
@@ -76,9 +78,19 @@ autoplay = true
 process_mode = 3
 stream = ExtResource("3_i4b1j")
 
-[node name="AnnouncerWIN" type="AudioStreamPlayer" parent="." unique_id=1846012000]
+[node name="AnnouncerKNOCKOUT" type="AudioStreamPlayer" parent="." unique_id=1846012000]
 process_mode = 3
 stream = ExtResource("4_c0d7e")
+
+[node name="AnnouncerWIN" type="AudioStreamPlayer" parent="." unique_id=1457396599]
+process_mode = 3
+stream = ExtResource("5_rpuxp")
+pitch_scale = 1.1
+bus = &"YOU_WIN"
+
+[node name="VictoryJingle" type="AudioStreamPlayer" parent="." unique_id=412431334]
+process_mode = 3
+stream = ExtResource("6_nthub")
 
 [node name="TimeKeeper" type="Timer" parent="." unique_id=939310887]
 

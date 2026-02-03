@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var mask_scene = load("res://scenes/Mask.tscn")
+@onready var mask_scene = load(Global.mask_scene_path)
 @onready var timer = $Timer
 
 var spawning_points = [0]
@@ -48,7 +48,7 @@ func spawn() -> void:
 	new_mask.position.x = eligible_spawning_points.pick_random()
 	# TODO maybe a more complex heuristic for mask ability?
 	randomize()
-	new_mask.ability = Global.ABILITIES.values().pick_random()
+	new_mask.set_ability(Global.ABILITIES.values().pick_random())
 
 	add_child(new_mask)
 
