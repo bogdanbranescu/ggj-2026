@@ -108,13 +108,13 @@ shader_parameter/fighter_id = 1
 [sub_resource type="SpriteFrames" id="SpriteFrames_stky8"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("10_jnlbf")
 }, {
-"duration": 1.0,
+"duration": 0.2,
 "texture": ExtResource("11_my8ku")
 }, {
-"duration": 1.0,
+"duration": 0.2,
 "texture": ExtResource("12_vfuwu")
 }, {
 "duration": 1.0,
@@ -248,28 +248,39 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_oas24"]
+animations = [{
+"frames": [{
+"duration": 0.4,
+"texture": ExtResource("43_y8ltq")
+}, {
+"duration": 0.4,
+"texture": ExtResource("44_3dryr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_g41i3"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.2,
 "texture": ExtResource("41_oas24")
 }, {
-"duration": 1.0,
+"duration": 0.2,
 "texture": ExtResource("42_gwx2t")
 }],
-"loop": false,
+"loop": true,
 "name": &"ability_dash",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("43_y8ltq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("44_3dryr")
-}, {
-"duration": 1.0,
+"duration": 0.4,
 "texture": ExtResource("45_1uwfx")
+}, {
+"duration": 1.0,
+"texture": null
 }],
 "loop": false,
 "name": &"ability_fireball",
@@ -279,10 +290,10 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("46_4fvuh")
 }, {
-"duration": 0.5,
+"duration": 0.4,
 "texture": ExtResource("47_dy85n")
 }, {
-"duration": 0.5,
+"duration": 0.4,
 "texture": ExtResource("48_rn6rw")
 }],
 "loop": false,
@@ -290,16 +301,16 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.8,
+"duration": 0.5,
 "texture": ExtResource("41_qliom")
 }, {
-"duration": 0.8,
+"duration": 0.2,
 "texture": ExtResource("42_i7j4p")
 }, {
-"duration": 0.4,
+"duration": 0.2,
 "texture": ExtResource("43_6sbvo")
 }, {
-"duration": 0.8,
+"duration": 1.2,
 "texture": ExtResource("44_70r88")
 }],
 "loop": false,
@@ -319,7 +330,6 @@ height = 200.0
 size = Vector2(144, 20)
 
 [node name="Fighter" type="CharacterBody2D" unique_id=2083199202]
-position = Vector2(-2, -2)
 collision_layer = 0
 script = ExtResource("1_l7220")
 
@@ -348,15 +358,21 @@ material = SubResource("ShaderMaterial_358vv")
 position = Vector2(0, 1)
 scale = Vector2(0.37, 0.37)
 sprite_frames = SubResource("SpriteFrames_stky8")
-animation = &"base_attack"
+animation = &"ability_fireball"
+autoplay = "idle"
+
+[node name="Fireball" type="AnimatedSprite2D" parent="Sprite" unique_id=648801034]
+visible = false
+use_parent_material = true
+sprite_frames = SubResource("SpriteFrames_oas24")
+animation = &"idle"
 autoplay = "idle"
 
 [node name="FX" type="AnimatedSprite2D" parent="Sprite" unique_id=1656409290]
 visible = false
-position = Vector2(0, -2.7027028)
-scale = Vector2(2.7027028, 2.7027028)
+use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_g41i3")
-animation = &"ability_dash"
+animation = &"ability_fireball"
 
 [node name="Hitbox" type="Node2D" parent="Sprite" unique_id=1959475508]
 unique_name_in_owner = true

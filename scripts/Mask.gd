@@ -94,7 +94,7 @@ func _physics_process(delta: float) -> void:
 
 	if not is_equiped:
 		position.x = 750 * cos(cycle_direction * PI / 2 + time)
-		position.y = 250 + 500 * sin(time) * cos(time)
+		position.y = 300 + 500 * sin(time) * cos(time)
 
 	if timer.time_left > 0.0 and timer.time_left < 2.4 and not is_animating_depletion:
 		print("here", self )
@@ -173,4 +173,4 @@ func apply_hit(area: Area2D) -> void:
 
 	if area.name == "CollectionArea" and this_fighter != receiving_fighter: # Don't hit yourself!
 		var damage_direction = (this_fighter.facing * Vector2.RIGHT).normalized()
-		area.get_parent().take_damage(Global.basic_attack_damage, damage_direction)
+		area.get_parent().take_damage(ability.damage, damage_direction)

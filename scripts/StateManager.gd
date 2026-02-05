@@ -14,7 +14,6 @@ func _ready() -> void:
 
 
 func _on_main_entered() -> void:
-	# TODO handle music, player movement, masks
 	EventBus.player_movement_disabled.emit()
 	await get_tree().create_timer(0.7).timeout
 
@@ -24,7 +23,6 @@ func _on_main_entered() -> void:
 
 func _on_outro_entered() -> void:
 	print("GAME OVER")
-	# TODO handle music, player movement, masks, win panel
 	
 	get_node("../BGM").stop()
 	get_node("../VictoryJingle").play()

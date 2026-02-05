@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var state = $StateChart
 @onready var sprite = $Sprite
 @onready var effect = $Sprite/FX
+@onready var effect_fireball_idle = $Sprite/Fireball
 @onready var mask_holder = %MaskHolder
 @onready var hitbox = %Hitbox
 
@@ -38,7 +39,11 @@ var is_attacking := false
 var is_recovering := false
 var is_hitstunned := false
 
-var current_mask: RigidBody2D
+var current_mask: RigidBody2D:
+	set(value):
+		current_mask = value
+		if value == null:
+			effect_fireball_idle.hide()
 
 var has_died := false
 
@@ -119,15 +124,22 @@ func use_mask_ability() -> void:
 	is_recovering = true
 	current_mask.use_ability()
 	
-	sprite.play("ability_" + current_mask.ability.name)
+	effect.show()
 	effect.play("ability_" + current_mask.ability.name)
+	sprite.play("ability_" + current_mask.ability.name)
 
+	if current_mask.ability.name == "fireball":
+		effect_fireball_idle.hide()
 	if current_mask.ability.name == "dash":
 		is_dashing = true
+
 	current_mask.enable_detection(true)
-	print("HIT")
 	await current_mask.sprite.animation_finished
-	print("AFTER HIT")
+
+	effect.hide()
+	if current_mask.ability.name == "fireball":
+		effect_fireball_idle.show()
+
 	
 	is_attacking = false
 	is_dashing = false
@@ -164,6 +176,8 @@ func collect_mask(mask: RigidBody2D) -> void:
 func mask_setup() -> void:
 	current_mask.reparent(self.mask_holder)
 	current_mask.position = Vector2.ZERO
+
+	effect_fireball_idle.visible = (current_mask.ability.name == "fireball")
 
 
 func take_damage(damage_amount: int, damage_direction: Vector2) -> void:

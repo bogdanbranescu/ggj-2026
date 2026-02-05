@@ -12,13 +12,11 @@ func _ready() -> void:
 
 
 func game_over(id: int) -> void:
-	# TODO winner camera flourish
-	# TODO disable actions
 	print(id, " died!")
 	state_manager.send_event("game_over")
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	%Debug.text = str(%Camera.zoom, "\n", %Camera.position)
 
 

@@ -75,7 +75,7 @@ animations = [{
 "duration": 0.2,
 "texture": ExtResource("6_0ru6t")
 }, {
-"duration": 0.2,
+"duration": 0.05,
 "texture": ExtResource("2_2fed6")
 }],
 "loop": false,
@@ -92,7 +92,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_8roxg")
 }, {
-"duration": 1.0,
+"duration": 0.05,
 "texture": ExtResource("7_03d2g")
 }],
 "loop": false,
@@ -103,13 +103,13 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("10_2grb2")
 }, {
-"duration": 1.0,
+"duration": 0.4,
 "texture": ExtResource("11_4uv4a")
 }, {
-"duration": 1.0,
+"duration": 0.4,
 "texture": ExtResource("12_wqtbv")
 }, {
-"duration": 1.0,
+"duration": 0.05,
 "texture": ExtResource("10_2grb2")
 }],
 "loop": false,
@@ -117,22 +117,22 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.05,
 "texture": ExtResource("10_ue550")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("11_2grb2")
 }, {
-"duration": 1.0,
+"duration": 0.2,
 "texture": ExtResource("12_4uv4a")
 }, {
-"duration": 1.0,
+"duration": 0.2,
 "texture": ExtResource("13_wqtbv")
 }, {
-"duration": 1.0,
+"duration": 1.15,
 "texture": ExtResource("14_r0aok")
 }, {
-"duration": 1.0,
+"duration": 0.05,
 "texture": ExtResource("10_ue550")
 }],
 "loop": false,
@@ -169,11 +169,11 @@ shader_parameter/fighter_id = 0
 radius = 400.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4uv4a"]
-radius = 800.0
+radius = 600.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r0aok"]
-radius = 100.0
-height = 350.0
+radius = 150.0
+height = 550.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eic0r"]
 radius = 70.0
@@ -211,10 +211,11 @@ material = SubResource("ShaderMaterial_2grb2")
 position = Vector2(-1, 2)
 scale = Vector2(0.37, 0.37)
 sprite_frames = SubResource("SpriteFrames_eic0r")
-animation = &"ability_dash"
+animation = &"ability_parry"
 
 [node name="Hitbox" type="Area2D" parent="Sprite" unique_id=136306468]
 material = SubResource("ShaderMaterial_wqtbv")
+position = Vector2(-2.7192142, -0.016561797)
 
 [node name="Collider_dash" type="CollisionShape2D" parent="Sprite/Hitbox" unique_id=214215001]
 unique_name_in_owner = true
@@ -223,12 +224,13 @@ disabled = true
 
 [node name="Collider_parry" type="CollisionShape2D" parent="Sprite/Hitbox" unique_id=1445418163]
 unique_name_in_owner = true
+position = Vector2(0, -40)
 shape = SubResource("CircleShape2D_4uv4a")
 disabled = true
 
 [node name="Collider_punch" type="CollisionShape2D" parent="Sprite/Hitbox" unique_id=685566973]
 unique_name_in_owner = true
-position = Vector2(289.1892, -24.324333)
+position = Vector2(373.2607, -98.86677)
 rotation = 0.87266463
 shape = SubResource("CapsuleShape2D_r0aok")
 disabled = true

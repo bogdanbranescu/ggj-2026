@@ -6,6 +6,29 @@
 [ext_resource type="Texture2D" uid="uid://34quwmw4ws22" path="res://gfx/characters/Masks/Projectile/Fx/Projectile_fx_04_active1.png" id="5_b6x4e"]
 [ext_resource type="Texture2D" uid="uid://2htbsh1m8hgi" path="res://gfx/characters/Masks/Projectile/Fx/Projectile_fx_05_active2.png" id="6_ioblm"]
 
+[sub_resource type="Shader" id="Shader_du7tx"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float treshold = 1.0;
+uniform float speed = 25.0;
+uniform int fighter_id = 0;
+
+void fragment() {
+	if (fighter_id == 1) {
+		COLOR.rgb = vec3(0.93, 0.25, 0.14);	
+	} else if (fighter_id == 2) {
+		COLOR.rgb = vec3(0.33, 0.51, 0.25);	
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjnh8"]
+resource_local_to_scene = true
+shader = SubResource("Shader_du7tx")
+shader_parameter/treshold = 1.0
+shader_parameter/speed = 25.0
+shader_parameter/fighter_id = 0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_dprbf"]
 animations = [{
 "frames": [{
@@ -32,9 +55,11 @@ animations = [{
 radius = 50.0
 
 [node name="Projectile" type="Area2D" unique_id=813633531]
+material = SubResource("ShaderMaterial_qjnh8")
 script = ExtResource("1_dprbf")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1310024456]
+use_parent_material = true
 scale = Vector2(0.37, 0.37)
 sprite_frames = SubResource("SpriteFrames_dprbf")
 animation = &"move"

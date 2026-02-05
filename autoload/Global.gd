@@ -8,13 +8,13 @@ var nodepath_environment = "/root/World/Environment"
 
 
 const ABILITIES = {
-    PUNCH = {
-        name = "punch",
-        uses = 3,
-        time = 5.0,
-        damage = 10.0,
-        recovery = 1.0,
-    },
+    # PUNCH = {
+    #     name = "punch",
+    #     uses = 3,
+    #     time = 5.0,
+    #     damage = 8.0,
+    #     recovery = 1.0,
+    # },
     FIREBALL = {
         name = "fireball",
         uses = 3,
@@ -25,26 +25,26 @@ const ABILITIES = {
     DASH = {
         name = "dash",
         uses = 1,
-        time = 5.0,
-        damage = 20.0,
+        time = 4.0,
+        damage = 18.0,
         recovery = 1.0,
     },
-    PARRY = {
-        name = "parry",
-        uses = 3,
-        time = 5.0,
-        damage = 10.0,
-        recovery = 1.0,
-    },
+    # PARRY = {
+    #     name = "parry",
+    #     uses = 3,
+    #     time = 5.0,
+    #     damage = 10.0,
+    #     recovery = 1.0,
+    # },
 }
 
 const LIMITED_MASK_USES := false
 const LIMITED_MASK_TIME := true
 
-const basic_attack_damage := 4.0
-const basic_attack_recovery := 0.3
+const basic_attack_damage := 3.0
+const basic_attack_recovery := 0.1
 
-const environment_mask_limit := 1
+const environment_mask_limit := 2
 
 const starting_hp := 100
 
