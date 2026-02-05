@@ -37,10 +37,10 @@ func _physics_process(delta: float) -> void:
 
 	var fighter_distance = fighters[1].position.x - fighters[2].position.x
 
-	zoom = clamp(zoom_base + 150 / abs(fighter_distance), 0.85, 1.9) * Vector2.ONE
+	zoom = clamp(zoom_base + 150 / pow(abs(fighter_distance), 1.05), 0.85, 1.8) * Vector2.ONE
 
 	position.x = (fighters[1].position.x + fighters[2].position.x) / 2
-	position.y = clamp(initial_position.y, -300, 100) # initial_position.y + zoom.y * fighter_distance * 0.2
+	position.y = -250 / pow(zoom.y, 2) # clamp(initial_position.y, -200, 50 * zoom.y) # initial_position.y + zoom.y * fighter_distance * 0.2
 
 
 func show_loser(delta: float) -> void:

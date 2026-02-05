@@ -1,6 +1,32 @@
 [gd_scene format=3 uid="uid://b2svygcrkdsck"]
 
 [ext_resource type="Script" uid="uid://bqnkt5jcuudtr" path="res://scripts/Projectile.gd" id="1_dprbf"]
+[ext_resource type="AudioStream" uid="uid://dh8oefr8lkkfo" path="res://audio/sfx/fireball_impact.wav" id="2_vihyi"]
+[ext_resource type="Texture2D" uid="uid://b5pnmtbob545s" path="res://gfx/characters/Masks/Projectile/Fx/Projectile_fx_03_windup.png" id="4_bsf0s"]
+[ext_resource type="Texture2D" uid="uid://34quwmw4ws22" path="res://gfx/characters/Masks/Projectile/Fx/Projectile_fx_04_active1.png" id="5_b6x4e"]
+[ext_resource type="Texture2D" uid="uid://2htbsh1m8hgi" path="res://gfx/characters/Masks/Projectile/Fx/Projectile_fx_05_active2.png" id="6_ioblm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dprbf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bsf0s")
+}],
+"loop": true,
+"name": &"launch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_b6x4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ioblm")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dprbf"]
 radius = 50.0
@@ -8,7 +34,14 @@ radius = 50.0
 [node name="Projectile" type="Area2D" unique_id=813633531]
 script = ExtResource("1_dprbf")
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=1415368477]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1310024456]
+scale = Vector2(0.37, 0.37)
+sprite_frames = SubResource("SpriteFrames_dprbf")
+animation = &"move"
+autoplay = "move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=280043761]
 shape = SubResource("CircleShape2D_dprbf")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="." unique_id=1096899909]
+stream = ExtResource("2_vihyi")

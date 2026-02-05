@@ -10,16 +10,17 @@ func _ready() -> void:
 
 	timekeeper.start()
 
-	EventBus.player_movement_disabled.emit()
-	await get_tree().create_timer(0.7).timeout
-	EventBus.player_movement_enabled.emit()
-
-	# Fight setup
-	# TODO camera flourish
-	$AnnouncerFIGHT.play()
 
 func game_over(id: int) -> void:
 	# TODO winner camera flourish
 	# TODO disable actions
 	print(id, " died!")
 	state_manager.send_event("game_over")
+
+
+func _process(delta: float) -> void:
+	%Debug.text = str(%Camera.zoom, "\n", %Camera.position)
+
+
+# func _input(event: InputEvent) -> void:
+# 	print(event)

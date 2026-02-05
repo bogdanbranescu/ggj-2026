@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://b3crfnjfspji" path="res://scripts/UI.gd" id="12_7c4bj"]
 [ext_resource type="Texture2D" uid="uid://dyua2xrsed6hy" path="res://ui/character_portrait.tres" id="15_o1tcx"]
 [ext_resource type="Shader" uid="uid://bqculv2ulltgq" path="res://ui/shader/damage_flash.gdshader" id="15_rpuxp"]
+[ext_resource type="FontFile" uid="uid://dd1gwawfut3sd" path="res://ui/fonts/Super Comic.ttf" id="17_44lqw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1c63"]
 size = Vector2(2000, 20)
@@ -54,7 +55,7 @@ shader_parameter/speed = 25.0
 shader_parameter/fighter_id = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1tcx"]
-bg_color = Color(0.101960786, 0.0627451, 0.17254902, 1)
+bg_color = Color(0.22745098, 0.18039216, 0.34901962, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0d7e"]
 bg_color = Color(0.78039217, 0.0627451, 0.17254902, 1)
@@ -153,7 +154,8 @@ scale = Vector2(0.25, 0.25)
 color = Color(1, 0.93333334, 0.75, 1)
 
 [node name="Ground" type="StaticBody2D" parent="Environment" unique_id=821027775]
-collision_layer = 5
+collision_layer = 13
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Ground" unique_id=604389993]
 position = Vector2(0, 200)
@@ -161,14 +163,16 @@ shape = SubResource("RectangleShape2D_d1c63")
 
 [node name="LimitLeft" type="StaticBody2D" parent="Environment" unique_id=136285355]
 position = Vector2(-1000, -300)
-collision_layer = 5
+collision_layer = 13
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/LimitLeft" unique_id=48154889]
 shape = SubResource("RectangleShape2D_1lgw5")
 
 [node name="LimitRight" type="StaticBody2D" parent="Environment" unique_id=510609239]
 position = Vector2(1000, -298)
-collision_layer = 5
+collision_layer = 13
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/LimitRight" unique_id=1813589498]
 shape = SubResource("RectangleShape2D_hlk0d")
@@ -182,9 +186,11 @@ script = ExtResource("7_ygioq")
 [node name="Characters" type="Node2D" parent="." unique_id=1944501478]
 
 [node name="Camera" type="Camera2D" parent="Characters" unique_id=2044144339]
+unique_name_in_owner = true
 position = Vector2(1, -1)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
+position_smoothing_speed = 100.0
 script = ExtResource("5_hlk0d")
 
 [node name="Fighter_1" parent="Characters" unique_id=2083199202 instance=ExtResource("2_1lgw5")]
@@ -195,6 +201,17 @@ position = Vector2(316, 0)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=418506312]
 
+[node name="Debug" type="Label" parent="UI" unique_id=865593029]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 200)
+offset_left = 100.0
+offset_top = 300.0
+offset_right = 1100.0
+offset_bottom = 500.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+
 [node name="UI" type="Control" parent="UI" unique_id=1084686285]
 layout_mode = 3
 anchors_preset = 15
@@ -203,6 +220,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_7c4bj")
+
+[node name="TextFIGHT" type="RichTextLabel" parent="UI/UI" unique_id=357225705]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.91, 0.46137, 0.1183, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 50
+theme_override_fonts/normal_font = ExtResource("17_44lqw")
+theme_override_font_sizes/normal_font_size = 120
+text = "
+FIGHT!
+
+
+
+
+
+"
+fit_content = true
+horizontal_alignment = 1
 
 [node name="UIContainer" type="VBoxContainer" parent="UI/UI" unique_id=1958297920]
 layout_mode = 1
@@ -228,6 +272,16 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("15_o1tcx")
 expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/UI/UIContainer/Bars/Player1/Icon" unique_id=741620492]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.22749995, 0.175, 0.35, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/UI/UIContainer/Bars/Player1" unique_id=1358472944]
 custom_minimum_size = Vector2(30, 0)
@@ -274,3 +328,13 @@ layout_mode = 2
 texture = ExtResource("15_o1tcx")
 expand_mode = 1
 flip_h = true
+
+[node name="ColorRect" type="ColorRect" parent="UI/UI/UIContainer/Bars/Player2/Icon" unique_id=44095510]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.22749995, 0.175, 0.35, 1)

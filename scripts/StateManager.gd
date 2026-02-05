@@ -14,8 +14,12 @@ func _ready() -> void:
 
 
 func _on_main_entered() -> void:
-	print("FIGHT!!")
-   # TODO handle music, player movement, masks
+	# TODO handle music, player movement, masks
+	EventBus.player_movement_disabled.emit()
+	await get_tree().create_timer(0.7).timeout
+
+	EventBus.player_movement_enabled.emit()
+	get_node("../AnnouncerFIGHT").play()
 
 
 func _on_outro_entered() -> void:
@@ -29,9 +33,9 @@ func _on_outro_entered() -> void:
 	sfx.play()
 	await sfx.finished
 	
-	sfx = get_node("../AnnouncerWIN")
-	sfx.play()
-	await sfx.finished
+	# sfx = get_node("../AnnouncerWIN")
+	# sfx.play()
+	# await sfx.finished
 	
 	await get_tree().create_timer(1.5).timeout
 	

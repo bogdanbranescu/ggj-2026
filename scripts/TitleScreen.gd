@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
     characters_right.position.y = characters_right_init_position.y - sin(time * 0.5) * characters_amplitude
 
 
-func _unhandled_key_input(event):
+func _input(_event: InputEvent):
     if Input.is_action_just_pressed("action1") or Input.is_action_just_pressed("action2"):
         go_to_game()
 

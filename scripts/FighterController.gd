@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @onready var state = $StateChart
 @onready var sprite = $Sprite
+@onready var effect = $Sprite/FX
 @onready var mask_holder = %MaskHolder
 @onready var hitbox = %Hitbox
 
@@ -15,15 +16,22 @@ var is_holding_mask: bool
 # Movement
 @export var gravity = 4000
 @export var speed = 500
-var jump_force := 1800
+var jump_force := 1600
+var dash_force := 3000
 var direction := 0.0
-var facing := 1.0
+var facing := 1.0:
+	set(value):
+		if facing != value:
+			print(value)
+		facing = value
+		
 
+var is_dashing := false
 var is_waiting := false
 
 # Combat
 var knockback_velocity: Vector2
-var knockback_force := 2000
+var knockback_force := 2500
 var knockback_decay := 10000
 
 var is_attacking := false
@@ -54,7 +62,7 @@ func _physics_process(delta: float) -> void:
 			act(delta)
 			move(delta)
 
-		if Input.is_action_just_pressed("up" + str(id)): # and not has_died:
+		if Input.is_action_just_pressed("up" + str(id)):
 			if is_jump_available:
 				jump(jump_force)
 
@@ -63,9 +71,13 @@ func _physics_process(delta: float) -> void:
 
 		if is_attacking:
 			velocity = Vector2.ZERO
+
+		if is_dashing:
+			velocity = dash_force * Vector2.RIGHT * facing
+
 	
 	else:
-		velocity = knockback_velocity
+		velocity = knockback_velocity * 3 if is_dashing else knockback_velocity
 		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, knockback_decay * delta)
 	
 	
@@ -84,7 +96,7 @@ func act(_delta: float) -> void:
 		if mask_holder.get_child_count() == 0:
 			attack_default()
 		else:
-			current_mask.use_ability()
+			use_mask_ability()
 
 
 func attack_default() -> void:
@@ -97,8 +109,31 @@ func attack_default() -> void:
 	is_attacking = false
 	hitbox.enable_detection(false)
 	is_recovering = true
-
 	await get_tree().create_timer(Global.basic_attack_recovery).timeout
+
+	is_recovering = false
+
+
+func use_mask_ability() -> void:
+	is_attacking = true
+	is_recovering = true
+	current_mask.use_ability()
+	
+	sprite.play("ability_" + current_mask.ability.name)
+	effect.play("ability_" + current_mask.ability.name)
+
+	if current_mask.ability.name == "dash":
+		is_dashing = true
+	current_mask.enable_detection(true)
+	print("HIT")
+	await current_mask.sprite.animation_finished
+	print("AFTER HIT")
+	
+	is_attacking = false
+	is_dashing = false
+	current_mask.enable_detection(false)
+	await get_tree().create_timer(current_mask.ability.recovery).timeout
+
 	is_recovering = false
 
 
@@ -111,20 +146,24 @@ func move(_delta: float) -> void:
 
 func jump(force) -> void:
 	velocity.y = - force
-	# jump_hold_timer.start()
-	# jump_buffer_timer.stop()
 
 	$Sounds/Jump.play()
 
 
+func dash() -> void:
+	pass
+
+
 func collect_mask(mask: RigidBody2D) -> void:
-	# for child in mask_holder.get_children():
-	# 	child.queue_free()
+	for child in mask_holder.get_children():
+		child.queue_free()
 	current_mask = mask
-	# if mask_holder.get_child_count() > 0:
-	# 	mask_holder.get_child(0).queue_free()
-	
-	mask.call_deferred("reparent", self.mask_holder, true)
+	call_deferred("mask_setup")
+
+
+func mask_setup() -> void:
+	current_mask.reparent(self.mask_holder)
+	current_mask.position = Vector2.ZERO
 
 
 func take_damage(damage_amount: int, damage_direction: Vector2) -> void:
@@ -191,5 +230,6 @@ func update_animations():
 func update_facing():
 	if direction != 0:
 		facing = direction
-		hitbox.scale.x = direction
-		sprite.flip_h = (direction == -1)
+		hitbox.scale.x = facing
+		sprite.flip_h = (facing == -1)
+		mask_holder.scale.x = facing
