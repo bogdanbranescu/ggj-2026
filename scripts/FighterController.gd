@@ -23,7 +23,7 @@ var direction := 0.0
 var facing := 1.0:
 	set(value):
 		if facing != value:
-			print(value)
+			print("FLIPPED FACING ", value)
 		facing = value
 		
 
@@ -57,6 +57,11 @@ func _ready() -> void:
 	hp = Global.starting_hp
 
 	sprite.material.set_shader_parameter("fighter_id", id)
+
+
+func _process(delta: float) -> void:
+	if self.name == "Fighter_1":
+		print(facing)
 
 
 func _physics_process(delta: float) -> void:
@@ -176,6 +181,8 @@ func collect_mask(mask: RigidBody2D) -> void:
 func mask_setup() -> void:
 	current_mask.reparent(self.mask_holder)
 	current_mask.position = Vector2.ZERO
+	# if mask_holder.scale.x != current_mask.scale.x:
+	# 	mask_holder.scale.x *= -1
 
 	effect_fireball_idle.visible = (current_mask.ability.name == "fireball")
 
@@ -207,9 +214,9 @@ func flash_damage(enable: bool) -> void:
 	var treshold_value
 
 	if enable:
-		treshold_value = 0.0;
+		treshold_value = 0.0
 	else:
-		treshold_value = 1.0;
+		treshold_value = 1.0
 		
 	sprite.material.set_shader_parameter("treshold", treshold_value)
 		
@@ -245,5 +252,14 @@ func update_facing():
 	if direction != 0:
 		facing = direction
 		hitbox.scale.x = facing
+		
 		sprite.flip_h = (facing == -1)
+		effect.flip_h = (facing == -1)
+
 		mask_holder.scale.x = facing
+
+		if current_mask == null:
+			return
+
+		if mask_holder.scale.x != current_mask.scale.x:
+			mask_holder.scale.x *= -1

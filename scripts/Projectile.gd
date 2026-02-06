@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	if direction == Vector2.ZERO:
 		return
 
-	position.x += delta * speed
+	position.x += delta * speed * direction.x
 
 
 func _on_collision(area: Area2D) -> void:

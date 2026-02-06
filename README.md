@@ -3,10 +3,32 @@
 Get Godot 4.6 from: https://godotengine.org/download/
 
 
-## Requirements
-### Code
+
+## POST-JAM/-DK tasks
+### Bugfixing
+- [ ] Clean code!! 
+- [ ] Correct mask and collider facing
+- [ ] Fireball idle animation (stuck to fighter after unequiping)
+### Features
+- [ ] Implement shield mask (block + parry)
+- [ ] 2 out of 3 round structure (?)
+### Feedback
+- [ ] Mitigate fireball stunlock
+- [ ] More accurate collider sizes
+- [ ] Better movement (faster, larger stage?)
+### Graphics
+- [ ] Stage background
+- [ ] HP bars aligned with artstyle
+### Extra polish
+- [ ] Better mask expiry indicator
+- [ ] Some indication of recovery time
+- [ ] Balance: damage, recovery time, expiry time, spawn probabilities
+
+## (old) GGJ Requirements
+
+#### Code
 - [x] Basic character movement (jumping later if time allows)
-- [ ] Solid colliders, hitboxes, hurtboxes, collection areas (adjust when character sillhouettes are available)
+- [x] Solid colliders, hitboxes, hurtboxes, collection areas (adjust when character sillhouettes are available)
 - [ ] Frame decision algorithm (who hit who, overlaps, etc)
 - [x] Dynamic 2-player camera
 - [ ] Default ability (ideas: mask stealing, weak push, etc)
@@ -18,35 +40,33 @@ Get Godot 4.6 from: https://godotengine.org/download/
 - [ ] Transitions (title -> stage, round -> next round, fight -> results)
 - [ ] Juice (damage flashing/shake, shaders, ability particles, intro/outro character/stage flourishes)
 - [ ] ~~(optional) pause~~
-### Music
+#### Music
 - [x] Battle BGM
 - [x] Title screen BGM (maybe a filtered/simplified version of the battle music)
-### SFX
-- [ ] jump - movement
+#### SFX
+- [x] jump - movement
 - [ ] jump - impact ?
-- [ ] steps (4-5)
-- [ ] basic punch
-- [ ] mask punch (punchier!)
-- [ ] fireball emission
-- [ ] fireball impact
-- [ ] dash
-- [ ] shield
-- [ ] announcer - start battle: FIGHT!
-- [ ] announcer - win: KNOCKOUT! / WIN!
-### Art
-- [ ] Character(s) - likely one palette swapped character
-- [ ] Masks (static + animated ability)
-- [ ] Import and animate in Godot
+- [x] steps (4-5)
+- [x] basic punch
+- [x] mask punch (punchier!)
+- [x] fireball emission
+- [x] fireball impact
+- [x] dash
+- [x] shield
+- [x] announcer - start battle: FIGHT!
+- [x] announcer - win: KNOCKOUT! / WIN!
+#### Art
+- [x] Character(s) - likely one palette swapped character
+- [x] Masks (static + animated ability)
+- [x] Import and animate in Godot
 - [ ] (maybe) Simple background
 - [ ] UI theming
-- [ ] Title screen (flashy font, etc)
-
-
-## Checklist
+- [x] Title screen (flashy font, etc)
+#### Checklist
 - [ ] Add credits in-game (creators + online assets)
-- [ ] Export clean jam build (disable broken/partially implemented parts)
-- [ ] Upload on https://polychrombo.itch.io/ggj-2026 (also add to https://papanash-games.itch.io)
-- [ ] Test HTML build on itch (controls, sound, etc)
-- [ ] Create game page on https://globalgamejam.org/jam-sites/2026/ggj-2026-romania
+- [x] Export clean jam build (disable broken/partially implemented parts)
+- [x] Upload on https://polychrombo.itch.io/ggj-2026 (also add to https://papanash-games.itch.io)
+- [x] Test HTML build on itch (controls, sound, etc)
+- [x] Create game page on https://globalgamejam.org/jam-sites/2026/ggj-2026-romania
 - [ ] (optional) Customize itch.io page theme
-- [ ] Celebrate!
+- [x] Celebrate!

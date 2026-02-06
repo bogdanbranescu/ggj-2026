@@ -208,14 +208,14 @@ stream = ExtResource("4_wqtbv")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1820585256]
 material = SubResource("ShaderMaterial_2grb2")
-position = Vector2(-1, 2)
+position = Vector2(-1.0061139, 1.9969314)
 scale = Vector2(0.37, 0.37)
 sprite_frames = SubResource("SpriteFrames_eic0r")
 animation = &"ability_parry"
 
 [node name="Hitbox" type="Area2D" parent="Sprite" unique_id=136306468]
 material = SubResource("ShaderMaterial_wqtbv")
-position = Vector2(-2.7192142, -0.016561797)
+position = Vector2(-2.7109458, -2.7192519)
 
 [node name="Collider_dash" type="CollisionShape2D" parent="Sprite/Hitbox" unique_id=214215001]
 unique_name_in_owner = true

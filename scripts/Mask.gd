@@ -70,8 +70,7 @@ func use_punch() -> void:
 
 
 func use_fireball() -> void:
-	await get_tree().create_timer(0.1).timeout
-
+	#await get_tree().create_timer(0.1).timeout
 	var fireball = projectile_scene.instantiate()
 	var fighter = get_node("../../..") # messy :(
 	fireball.wearer_ref = fighter

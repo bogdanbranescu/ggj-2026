@@ -7,6 +7,11 @@ var projectile_scene_path = "res://scenes/Projectile.tscn"
 var nodepath_environment = "/root/World/Environment"
 
 
+enum AB {
+    PUNCH,
+    DASH,
+}
+
 const ABILITIES = {
     # PUNCH = {
     #     name = "punch",
@@ -19,23 +24,23 @@ const ABILITIES = {
         name = "fireball",
         uses = 3,
         time = 8.0,
-        damage = 5.0,
-        recovery = 0.1,
+        damage = 3.0,
+        recovery = 0.5,
     },
     DASH = {
         name = "dash",
         uses = 1,
-        time = 4.0,
-        damage = 18.0,
+        time = 5.0,
+        damage = 15.0,
+        recovery = 1.5,
+    },
+    PARRY = {
+        name = "parry",
+        uses = 3,
+        time = 5.0,
+        damage = 10.0,
         recovery = 1.0,
     },
-    # PARRY = {
-    #     name = "parry",
-    #     uses = 3,
-    #     time = 5.0,
-    #     damage = 10.0,
-    #     recovery = 1.0,
-    # },
 }
 
 const LIMITED_MASK_USES := false

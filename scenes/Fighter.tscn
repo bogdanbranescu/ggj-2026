@@ -372,14 +372,14 @@ autoplay = "idle"
 visible = false
 use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_g41i3")
-animation = &"ability_fireball"
+animation = &"ability_punch"
 
 [node name="Hitbox" type="Node2D" parent="Sprite" unique_id=1959475508]
 unique_name_in_owner = true
 script = ExtResource("19_s7iku")
 
 [node name="HitArea" type="Area2D" parent="Sprite/Hitbox" unique_id=615975205]
-position = Vector2(348.64865, -70.27027)
+position = Vector2(345.94595, -70.27027)
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Hitbox/HitArea" unique_id=1084005375]
@@ -389,6 +389,7 @@ shape = SubResource("CapsuleShape2D_oas24")
 
 [node name="MaskHolder" type="Node2D" parent="Sprite" unique_id=1360918045]
 unique_name_in_owner = true
+position = Vector2(2.7027028, 0)
 scale = Vector2(2.7027028, 2.7027028)
 
 [node name="CollectionArea" type="Area2D" parent="." unique_id=388875658]
