@@ -6,23 +6,28 @@ Get Godot 4.6 from: https://godotengine.org/download/
 
 ## POST-JAM/-DK tasks
 ### Bugfixing
-- [ ] Clean code!! 
+- [ ] Clean code!!!
 - [ ] Correct mask and collider facing
 - [ ] Fireball idle animation (stuck to fighter after unequiping)
 ### Features
 - [ ] Implement shield mask (block + parry)
+- [ ] Basic attack disarms (?)
 - [ ] 2 out of 3 round structure (?)
+- [ ] Variable jumps
+- [ ] (stretch goal) Platforming / different levels - likely to introduce bugs
 ### Feedback
 - [ ] Mitigate fireball stunlock
 - [ ] More accurate collider sizes
-- [ ] Better movement (faster, larger stage?)
+- [ ] Better movement (faster fighters, larger stage?)
 ### Graphics
 - [ ] Stage background
 - [ ] HP bars aligned with artstyle
+- [ ] Particles (?)
 ### Extra polish
 - [ ] Better mask expiry indicator
 - [ ] Some indication of recovery time
 - [ ] Balance: damage, recovery time, expiry time, spawn probabilities
+- [ ] Better presentation for victory
 
 ## (old) GGJ Requirements
 
